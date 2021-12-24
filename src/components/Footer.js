@@ -54,7 +54,7 @@ function Footer() {
           <Link to="">
             {/* Icon */}
             {/* <img src="images/footer/phone-icon.png" alt="mobile-icon"/> */}
-            <img src={ "http://127.0.0.1:8000/media/site_images/phone-icon.png"} alt="mobile-icon"/>
+            <img src={ "http://55mahesh.pythonanywhere.com/media/site_images/phone-icon.png"} alt="mobile-icon"/>
           </Link>
           <p>+91 9123456798</p>
         </div>

@@ -70,7 +70,7 @@ function Registration() {
         const response = '';
         // console.log(userItems)
 
-        var baseURL = 'http://127.0.0.1:8000/api/user-create/'
+        var baseURL = 'http://55mahesh.pythonanywhere.com/api/user-create/'
         await axios
         .post(baseURL, userItems)
         .then((response) => {

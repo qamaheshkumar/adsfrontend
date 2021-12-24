@@ -14,7 +14,7 @@ function DashBoard(){
 	const [clearAllSearchText, setClearAllSearchText] = useState(false);	
 
 	const deleteClassified = async (adId) => {
-        await axios.delete('http://127.0.0.1:8000/api/classified-delete/'+adId)
+        await axios.delete('http://55mahesh.pythonanywhere.com/api/classified-delete/'+adId)
             .then((adsResponse) => {
 				axiosClassifiedResponse()
 			}
@@ -23,7 +23,7 @@ function DashBoard(){
 	}		
 
     const axiosClassifiedResponse = async () => {
-        await axios.get('http://127.0.0.1:8000/api/classified-detail-byuser/'+user_detail.userId)
+        await axios.get('http://55mahesh.pythonanywhere.com/api/classified-detail-byuser/'+user_detail.userId)
             .then((adsResponse) => {
 				if(searchText.length == 1){
 					setSerachText('')
@@ -44,7 +44,7 @@ function DashBoard(){
 		)
 	}
     const axiosUserDetailResponse = async () => {
-        await axios.get('http://127.0.0.1:8000/api/user-detail/'+user_detail.userId)
+        await axios.get('http://55mahesh.pythonanywhere.com/api/user-detail/'+user_detail.userId)
             .then((adsResponse) => {
 				setUserDetail(adsResponse.data)
             }
@@ -137,7 +137,7 @@ function DashBoard(){
 					<div className="widget user-dashboard-profile">
 						<div className="profile-thumb">
 							{/* <img src="images/user/user-thumb.jpg" alt="" className="rounded-circle"/> */}
-							<img className="rounded-circle" src={ "http://127.0.0.1:8000/media/site_images/user-avatar.png"} alt="user-avatar"/>
+							<img className="rounded-circle" src={ "http://55mahesh.pythonanywhere.com/media/site_images/user-avatar.png"} alt="user-avatar"/>
 						</div>
 						<h5 className="text-center">{userDetail.first_name + ' ' + userDetail.last_name}</h5>
 						{/* <p>Joined at {new Date(userDetail.created_at).toISOString().slice(0, 10)}</p> */}
@@ -182,7 +182,7 @@ function DashBoard(){
 								return(
 									<tr key={index}>
 									<td className="product-thumb">
-										<img width="80px" height="auto" src={ "http://127.0.0.1:8000"+eachAd.images} alt="image description"/></td>
+										<img width="80px" height="auto" src={ "http://55mahesh.pythonanywhere.com"+eachAd.images} alt="image description"/></td>
 									<td className="product-details">
 										<h3 className="title">{eachAd.title}</h3>
 										<span className="add-id"><strong>Ad ID:</strong> {eachAd.id}</span>

@@ -8,7 +8,7 @@ function AdsBulkUpdate() {
     const [adsHideDays, setAdsHideDays] = useState('');
 
     const axiosBulkHideResponse = async () => {
-            var baseURL = 'http://127.0.0.1:8000/api/classified-bulk-update/?days='+adsHideDays
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/classified-bulk-update/?days='+adsHideDays
             await axios
             .get(baseURL)
             .then((response) => {

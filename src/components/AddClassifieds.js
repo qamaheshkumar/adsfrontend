@@ -82,7 +82,7 @@ function AddClassifieds() {
     }
 
     const axiosAddClassifiedResponse = async (adsValues) => {
-        // const classifiedResponse = await axios.post('http://127.0.0.1:8000/api/classified-create/')
+        // const classifiedResponse = await axios.post('http://55mahesh.pythonanywhere.com/api/classified-create/')
         // setAllCategory(classifiedResponse.data)
         // const allCategory = await categoryResponse.data
         // console.log('allCategory ==> ', allCategory)
@@ -117,7 +117,7 @@ function AddClassifieds() {
 
                 // setClassifieds({...addClassifieds, 'images':'E:/Django_React/classifieds_app/ads/ads/'+addClassifieds.images})  
 
-        let baseURL = 'http://127.0.0.1:8000/api/classified-create/'
+        let baseURL = 'http://55mahesh.pythonanywhere.com/api/classified-create/'
         try{
             await axios
             .post(baseURL, formData, {headers})
@@ -131,22 +131,22 @@ function AddClassifieds() {
     }
 
     const axiosClassifiedResponse = async () => {
-        const categoryResponse = await axios.get('http://127.0.0.1:8000/api/category-list/')
+        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
         const allCategory = await categoryResponse.data
         console.log('allCategory ==> ', allCategory)
 
-        const statusResponse = await axios.get('http://127.0.0.1:8000/api/status-list/')
+        const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
         setAllStatus(statusResponse.data)
         const allStatus = await statusResponse.data
         console.log('allStatus ==> ', allStatus)
 
-        // const statusResponse1 = await axios.get('http://127.0.0.1:8000/api/classified-list/')
+        // const statusResponse1 = await axios.get('http://55mahesh.pythonanywhere.com/api/classified-list/')
         // setAllStatus1(statusResponse1.data)
         // const allStatus1 = await statusResponse1.data
         // console.log('allStatus1 ==> ', allStatus1)
 
-        const stateResponse = await axios.get('http://127.0.0.1:8000/api/state-list/')
+        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
         const allState = await stateResponse.data
         console.log('allState ==> ', allState)
@@ -160,7 +160,7 @@ function AddClassifieds() {
         // values.classified_district_id = ''
         // classified_status_id=''
         if(stateValueId){
-            await axios.get('http://127.0.0.1:8000/api/state_dist-detail/'+stateValueId+'/')    
+            await axios.get('http://55mahesh.pythonanywhere.com/api/state_dist-detail/'+stateValueId+'/')    
                 .then((districResponse) => {
                     setAllDistrict(districResponse.data)
                 }
@@ -339,7 +339,7 @@ function AddClassifieds() {
                         </Form>
                         {/* {allStatus1?
                             allStatus1.map((statis, index) => {
-                                return <div key={index}> <img src={'http://127.0.0.1:8000'+statis.images}  alt={statis.images} />  </div>
+                                return <div key={index}> <img src={'http://55mahesh.pythonanywhere.com'+statis.images}  alt={statis.images} />  </div>
                             })
                         : 'none'
                         } */}

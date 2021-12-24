@@ -18,7 +18,7 @@ function AddDistrict() {
 
     const requestAxios = async () => {
         if(isEditDistrict) {
-            var baseURL = 'http://127.0.0.1:8000/api/district-update/'+addDistrict.id+'/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/district-update/'+addDistrict.id+'/'
             await axios
             .put(baseURL, {'district':addDistrict.district, 'state_id':addDistrict.state_id})
             .then((response) => {
@@ -26,7 +26,7 @@ function AddDistrict() {
             });
             setIsEditDistrict(false)
         } else {
-            var baseURL = 'http://127.0.0.1:8000/api/district-create/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/district-create/'
             try{
                 await axios
                 .post(baseURL, {'district':addDistrict.district, 'state_id':addDistrict.state_id})
@@ -51,7 +51,7 @@ function AddDistrict() {
 
     const deleteDistrict = (district) => {
         console.log("Div is delete clicked -> ", district)
-        var baseURL = 'http://127.0.0.1:8000/api/district-delete/'+district.id+'/'
+        var baseURL = 'http://55mahesh.pythonanywhere.com/api/district-delete/'+district.id+'/'
         // alert(baseURL)
         axios
         .delete(baseURL)
@@ -63,12 +63,12 @@ function AddDistrict() {
     }    
 
     const axiosDistrictResponse = async () => {
-        const districtResponse = await axios.get('http://127.0.0.1:8000/api/district-list/')
+        const districtResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/district-list/')
         setAllDistrict(districtResponse.data)
         const allDistrict = await districtResponse.data
         console.log('allDistrict ==> ', allDistrict)
 
-        const stateResponse = await axios.get('http://127.0.0.1:8000/api/state-list/')
+        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
         const allState = await stateResponse.data
         console.log('allState ==> ', allState)        

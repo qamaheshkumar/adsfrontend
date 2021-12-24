@@ -39,7 +39,7 @@ function ForgotPassword() {
                 'user_number':userVerifyDetails[0].user_number, 
                 'is_admin':'0'
             }            
-            var baseURL = 'http://127.0.0.1:8000/api/user-update/'+userId+'/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/user-update/'+userId+'/'
             await axios
             .put(baseURL, userItems)
             .then((response) => {
@@ -61,7 +61,7 @@ function ForgotPassword() {
 
     async function getAllUserDetails(){
         console.log('user details -->');
-        var url = 'http://127.0.0.1:8000/api/user-list/'
+        var url = 'http://55mahesh.pythonanywhere.com/api/user-list/'
         const response = await axios.get(url);
         setUserDetails(response.data)
         // var strResponseData = (response.data);

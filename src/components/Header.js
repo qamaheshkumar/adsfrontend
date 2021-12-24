@@ -95,7 +95,7 @@ function Header() {
                 <div className="col-md-12">
                     <nav className="navbar navbar-expand-lg  navigation">
                         <Link className="navbar-brand" to="">
-                            <img src="http://127.0.0.1:8000/media/site_images/logo.png" alt="logo"/>
+                            <img src="http://55mahesh.pythonanywhere.com/media/site_images/logo.png" alt="logo"/>
                         </Link>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ml-auto main-nav ">

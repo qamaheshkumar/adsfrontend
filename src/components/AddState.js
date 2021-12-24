@@ -14,7 +14,7 @@ function AddState() {
 
     const requestAxios = async () => {
         if(isEditState) {
-            var baseURL = 'http://127.0.0.1:8000/api/state-update/'+addState.id+'/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-update/'+addState.id+'/'
             await axios
             .put(baseURL, {'state':addState.state})
             .then((response) => {
@@ -22,7 +22,7 @@ function AddState() {
             });
             setIsEditState(false)
         } else {
-            var baseURL = 'http://127.0.0.1:8000/api/state-create/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-create/'
             try{
                 await axios
                 .post(baseURL, {'state':addState.state})
@@ -45,7 +45,7 @@ function AddState() {
 
     const deleteState = (state) => {
         console.log("Div is delete clicked -> ", state)
-        var baseURL = 'http://127.0.0.1:8000/api/state-delete/'+state.id+'/'
+        var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-delete/'+state.id+'/'
         // alert(baseURL)
         axios
         .delete(baseURL)
@@ -57,7 +57,7 @@ function AddState() {
     }    
 
     const axiosStateResponse = async () => {
-        const stateResponse = await axios.get('http://127.0.0.1:8000/api/state-list/')
+        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
         const allState = await stateResponse.data
         console.log('allState ==> ', allState)

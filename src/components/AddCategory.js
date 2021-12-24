@@ -14,7 +14,7 @@ function AddCategory() {
 
     const requestAxios = async () => {
         if(isEditCategory) {
-            var baseURL = 'http://127.0.0.1:8000/api/category-update/'+addCategory.id+'/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-update/'+addCategory.id+'/'
             await axios
             .put(baseURL, {'category':addCategory.category})
             .then((response) => {
@@ -22,7 +22,7 @@ function AddCategory() {
             });
             setIsEditCategory(false)
         } else {
-            var baseURL = 'http://127.0.0.1:8000/api/category-create/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-create/'
             try{
                 await axios
                 .post(baseURL, {'category':addCategory.category})
@@ -45,7 +45,7 @@ function AddCategory() {
 
     const deleteCategory = (category) => {
         console.log("Div is delete clicked -> ", category)
-        var baseURL = 'http://127.0.0.1:8000/api/category-delete/'+category.id+'/'
+        var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-delete/'+category.id+'/'
         // alert(baseURL)
         axios
         .delete(baseURL)
@@ -57,7 +57,7 @@ function AddCategory() {
     }    
 
     const axiosCategoryResponse = async () => {
-        const categoryResponse = await axios.get('http://127.0.0.1:8000/api/category-list/')
+        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
         const allCategory = await categoryResponse.data
         console.log('allCategory ==> ', allCategory)

@@ -49,7 +49,7 @@ const onStateChange = async (stateValueId) => {
     console.log('stateValueId -> ', stateValueId)
     // setClassifieds({...addClassifieds, 'state_id':stateValueId})
 
-    await axios.get('http://127.0.0.1:8000/api/state_dist-detail/'+stateValueId+'/')
+    await axios.get('http://55mahesh.pythonanywhere.com/api/state_dist-detail/'+stateValueId+'/')
         .then((districResponse) => {
             setAllDistrict(districResponse.data)
         }
@@ -131,7 +131,7 @@ const onStateChange = async (stateValueId) => {
     });
 
     const axiosAddClassifiedResponse = async (updateAdsValues) => {
-        // const classifiedResponse = await axios.post('http://127.0.0.1:8000/api/classified-create/')
+        // const classifiedResponse = await axios.post('http://55mahesh.pythonanywhere.com/api/classified-create/')
         // setAllCategory(classifiedResponse.data)
         // const allCategory = await categoryResponse.data
         // console.log('allCategory ==> ', allCategory)
@@ -165,7 +165,7 @@ const onStateChange = async (stateValueId) => {
 
                 // setClassifieds({...addClassifieds, 'images':'E:/Django_React/classifieds_app/ads/ads/'+addClassifieds.images})  
 
-        let baseURL = 'http://127.0.0.1:8000/api/classified-update/'+addId+'/'
+        let baseURL = 'http://55mahesh.pythonanywhere.com/api/classified-update/'+addId+'/'
         try{
             await axios
             .put(baseURL, formData, {headers})
@@ -184,12 +184,12 @@ const onStateChange = async (stateValueId) => {
             "content-type": "multipart/form-data",
         }        
         // const tempId = addId.addId
-        // const updateUrl = 'http://127.0.0.1:8000/api/classified-update/'+addId+'/'
+        // const updateUrl = 'http://55mahesh.pythonanywhere.com/api/classified-update/'+addId+'/'
         // console.log('updateUrl ++++++ ==> ', updateUrl)
-        // const classifiedResponse = await axios.get('http://127.0.0.1:8000/api/classified-edit/'+addId+'/')
+        // const classifiedResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/classified-edit/'+addId+'/')
         // setUpdateAds(classifiedResponse.data)
         // const allState = await stateResponse.data
-        await axios.get('http://127.0.0.1:8000/api/classified-edit/'+addId+'/', {headers})
+        await axios.get('http://55mahesh.pythonanywhere.com/api/classified-edit/'+addId+'/', {headers})
         .then((classifiedResponse) =>{
             setUpdateAds(classifiedResponse.data)
             setIsEditCategory(true)
@@ -200,17 +200,17 @@ const onStateChange = async (stateValueId) => {
     }    
     
     const axiosClassifiedOtherResponse = async () => {
-        const categoryResponse = await axios.get('http://127.0.0.1:8000/api/category-list/')
+        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
         // const allCategory = await categoryResponse.data
         console.log('allCategory ==> ', allCategory)
 
-        const statusResponse = await axios.get('http://127.0.0.1:8000/api/status-list/')
+        const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
         setAllStatus(statusResponse.data)
         // const allStatus = await statusResponse.data
         console.log('allStatus ==> ', allStatus)
 
-        const stateResponse = await axios.get('http://127.0.0.1:8000/api/state-list/')
+        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
         // const allState = await stateResponse.data
         console.log('allState ==> ', allState)
@@ -263,7 +263,7 @@ const onStateChange = async (stateValueId) => {
                                     {updateAds.images ? 
                                     <div className="product-thumb">
                                         <label className="form-control-label" >Ad Image :</label>
-                                        <img width="500px" height="300px" src={ "http://127.0.0.1:8000"+updateAds.images} alt="image description"/>
+                                        <img width="500px" height="300px" src={ "http://55mahesh.pythonanywhere.com"+updateAds.images} alt="image description"/>
                                         {/* <input onChange={(e)=>setClassifieds({...addClassifieds, 'title':e.target.value})} value={updateAds.title} className="form-control" id="classified_title" type="text" name="classified_title" placeholder="classified title"/> */}
                                     </div>
                                     : ''

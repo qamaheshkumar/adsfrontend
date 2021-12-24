@@ -14,7 +14,7 @@ function AddStatus() {
 
     const requestAxios = async () => {
         if(isEditStatus) {
-            var baseURL = 'http://127.0.0.1:8000/api/status-update/'+addStatus.id+'/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/status-update/'+addStatus.id+'/'
             await axios
             .put(baseURL, {'status':addStatus.status})
             .then((response) => {
@@ -22,7 +22,7 @@ function AddStatus() {
             });
             setIsEditStatus(false)
         } else {
-            var baseURL = 'http://127.0.0.1:8000/api/status-create/'
+            var baseURL = 'http://55mahesh.pythonanywhere.com/api/status-create/'
             try{
                 await axios
                 .post(baseURL, {'status':addStatus.status})
@@ -45,7 +45,7 @@ function AddStatus() {
 
     const deleteStatus = (status) => {
         console.log("Div is delete clicked -> ", status)
-        var baseURL = 'http://127.0.0.1:8000/api/status-delete/'+status.id+'/'
+        var baseURL = 'http://55mahesh.pythonanywhere.com/api/status-delete/'+status.id+'/'
         // alert(baseURL)
         axios
         .delete(baseURL)
@@ -57,7 +57,7 @@ function AddStatus() {
     }    
 
     const axiosStatusResponse = async () => {
-        const statusResponse = await axios.get('http://127.0.0.1:8000/api/status-list/')
+        const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
         setAllStatus(statusResponse.data)
         const allStatus = await statusResponse.data
         console.log('allStatus ==> ', allStatus)

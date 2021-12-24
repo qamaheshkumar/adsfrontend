@@ -48,9 +48,9 @@ function AdsCategory() {
 		console.log('disctrictId 11 => ' + disctrictId)
 		setDisctrictId(disctrictId)
 		console.log('searchFieldText 1111 ==========> ', searchText)
-		let classifiedUrl = 'http://127.0.0.1:8000/api/classified-list-bydistrict/'+disctrictId+'/'
+		let classifiedUrl = 'http://55mahesh.pythonanywhere.com/api/classified-list-bydistrict/'+disctrictId+'/'
 		if(disctrictId === '0'){
-			classifiedUrl = 'http://127.0.0.1:8000/api/category-view/'+categoryId
+			classifiedUrl = 'http://55mahesh.pythonanywhere.com/api/category-view/'+categoryId
 		}
 		await axios.get(classifiedUrl)
 			.then((adsResponse) => {
@@ -74,12 +74,12 @@ function AdsCategory() {
 		)
 	}
     const axiosDistrictResponse = async () => {
-		await axios.get('http://127.0.0.1:8000/api/district-list/')
+		await axios.get('http://55mahesh.pythonanywhere.com/api/district-list/')
 			.then((districtResponse) => {
 				setAllDistrict(districtResponse.data)
 			}
 		)
-        // const districtResponse = await axios.get('http://127.0.0.1:8000/api/district-list/')
+        // const districtResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/district-list/')
 		// const tempAllDistrict = await districtResponse.data
         // setAllDistrict(tempAllDistrict)
         console.log('allDistrict ==> ', allDistrict)
@@ -140,7 +140,7 @@ function AdsCategory() {
 	}
 
     const axiosCategoryResponse = async () => {
-        const categoryResponse = await axios.get('http://127.0.0.1:8000/api/category-list/')
+        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
 		const allCategory = await categoryResponse.data
 		const selectedCategory = allCategory.map(item =>{
@@ -283,7 +283,7 @@ function AdsCategory() {
 											{eachAd.images?
 											<Link to={"/classified-view/"+eachAd.id}>
 												{/* <img className="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap"/> */}
-												<img className="card-img-top img-fluid" src={ "http://127.0.0.1:8000"+eachAd.images} alt="image description"/>
+												<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com"+eachAd.images} alt="image description"/>
 											</Link>
 											: ''
 											}

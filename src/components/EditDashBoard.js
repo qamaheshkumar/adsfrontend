@@ -81,7 +81,7 @@ function EditDashBoard(props){
         // const response = '';
         // console.log(userItems)
 
-        var baseURL = 'http://127.0.0.1:8000/api/user-update/'+loggedInUserId+'/'
+        var baseURL = 'http://55mahesh.pythonanywhere.com/api/user-update/'+loggedInUserId+'/'
         await axios
         .put(baseURL, userItems)
         .then((response) => {
@@ -97,7 +97,7 @@ function EditDashBoard(props){
     }    
 
     const axiosUserDetailResponse = async () => {
-        await axios.get('http://127.0.0.1:8000/api/user-detail/'+loggedInUserId)
+        await axios.get('http://55mahesh.pythonanywhere.com/api/user-detail/'+loggedInUserId)
             .then((adsResponse) => {
                 setUserDetail(adsResponse.data);
                 setUserName(userDetail.user_name);

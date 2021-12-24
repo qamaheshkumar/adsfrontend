@@ -46,7 +46,7 @@ function Login() {
         let navigateTo = '';
         // console.log(userItems)
 
-        var url = 'http://127.0.0.1:8000/api/user-login/'+loginCredentials.username+'/'
+        var url = 'http://55mahesh.pythonanywhere.com/api/user-login/'+loginCredentials.username+'/'
         try {
             const response = await axios.get(url);
             // var strResponseData = JSON.stringify(response.data); // stringify it

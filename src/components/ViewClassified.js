@@ -24,24 +24,24 @@ function ViewClassified(){
     const axiosClassifiedResponse = async () => {
         console.log('addId ++++++ ==> ', addId)
         // const tempId = addId.addId
-        // const updateUrl = 'http://127.0.0.1:8000/api/classified-update/'+addId+'/'
+        // const updateUrl = 'http://55mahesh.pythonanywhere.com/api/classified-update/'+addId+'/'
         // console.log('updateUrl ++++++ ==> ', updateUrl)
-        const classifiedResponse = await axios.get('http://127.0.0.1:8000/api/classified-view/'+addId+'/')
+        const classifiedResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/classified-view/'+addId+'/')
         setUpdateAds(classifiedResponse.data)
         // const allState = await stateResponse.data
         console.log('updateAds **** ==> ', updateAds)
 
-        const categoryResponse = await axios.get('http://127.0.0.1:8000/api/category-list/')
+        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
         // const allCategory = await categoryResponse.data
         console.log('allCategory ==> ', allCategory)
 
-        const statusResponse = await axios.get('http://127.0.0.1:8000/api/status-list/')
+        const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
         setAllStatus(statusResponse.data)
         // const allStatus = await statusResponse.data
         console.log('allStatus ==> ', allStatus)
 
-        const stateResponse = await axios.get('http://127.0.0.1:8000/api/state-list/')
+        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
         // const allState = await stateResponse.data
         console.log('allState ==> ', allState)
@@ -62,7 +62,7 @@ function ViewClassified(){
                         {/* <div className="price">$200</div> */}
                         {/* <a href=""> */}
                             {/* <img className="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap"/> */}
-                            <img className="card-img-top img-fluid" src={ "http://127.0.0.1:8000"+updateAds.images} alt="image description"/>
+                            <img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com"+updateAds.images} alt="image description"/>
                         {/* </a> */}
                     </div>
                     : ''
@@ -164,7 +164,7 @@ function ViewClassified(){
             </div>  
             {/* {allStatus1?
                 allStatus1.map((statis, index) => {
-                    return <div key={index}> <img src={'http://127.0.0.1:8000'+statis.images}  alt={statis.images} />  </div>
+                    return <div key={index}> <img src={'http://55mahesh.pythonanywhere.com'+statis.images}  alt={statis.images} />  </div>
                 })
             : 'none'
             } */}
