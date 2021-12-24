@@ -263,7 +263,7 @@ const onStateChange = async (stateValueId) => {
                                     {updateAds.images ? 
                                     <div className="product-thumb">
                                         <label className="form-control-label" >Ad Image :</label>
-                                        <img width="500px" height="300px" src={ "http://55mahesh.pythonanywhere.com"+updateAds.images} alt="image description"/>
+                                        <img width="500px" height="300px" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="image description"/>
                                         {/* <input onChange={(e)=>setClassifieds({...addClassifieds, 'title':e.target.value})} value={updateAds.title} className="form-control" id="classified_title" type="text" name="classified_title" placeholder="classified title"/> */}
                                     </div>
                                     : ''

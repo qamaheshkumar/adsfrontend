@@ -283,7 +283,7 @@ function AdsCategory() {
 											{eachAd.images?
 											<Link to={"/classified-view/"+eachAd.id}>
 												{/* <img className="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap"/> */}
-												<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com"+eachAd.images} alt="image description"/>
+												<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="image description"/>
 											</Link>
 											: ''
 											}
@@ -302,7 +302,7 @@ function AdsCategory() {
 												</li>
 											</ul>
 											<p className="card-text">{eachAd.description}</p>
-											<p className="card-text">Phone: {eachAd.phone_number}</p>
+											<p className="card-text">Phone: {typeof eachAd.phone_number !=='undefined'?eachAd.phone_number:''}</p>
 										</div>
 									</div>
 								</div>

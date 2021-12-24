@@ -62,7 +62,7 @@ function ViewClassified(){
                         {/* <div className="price">$200</div> */}
                         {/* <a href=""> */}
                             {/* <img className="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap"/> */}
-                            <img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com"+updateAds.images} alt="image description"/>
+                            <img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="image description"/>
                         {/* </a> */}
                     </div>
                     : ''
@@ -129,11 +129,11 @@ function ViewClassified(){
                     </div>                    
                     <div style={{flex: 6}} className="form-group">
                         <label className="form-control-label" >Ad Zip Code :</label>
-                        <input value={updateAds.zip_code} className="form-control" id="classified_zipcode" type="text" name="classified_zipcode" placeholder="zipcode"/>
+                        <input value={typeof updateAds.zip_code !=='undefined'?updateAds.zip_code:''} className="form-control" id="classified_zipcode" type="text" name="classified_zipcode" placeholder="zipcode"/>
                     </div>
                     <div style={{flex: 6}} className="form-group">
                         <label className="form-control-label" >Ad Phone Number :</label>
-                        <input value={updateAds.phone_number} className="form-control" id="classified_phone_number" type="text" name="classified_phone_number" placeholder="phone number"/>
+                        <input value={typeof updateAds.phone_number !=='undefined'?updateAds.phone_number:''} className="form-control" id="classified_phone_number" type="text" name="classified_phone_number" placeholder="phone number"/>
                     </div>                    
 
                     {/* <div style={{flex: 6}} className="form-group">

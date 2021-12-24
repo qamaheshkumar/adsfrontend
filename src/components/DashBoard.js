@@ -182,7 +182,7 @@ function DashBoard(){
 								return(
 									<tr key={index}>
 									<td className="product-thumb">
-										<img width="80px" height="auto" src={ "http://55mahesh.pythonanywhere.com"+eachAd.images} alt="image description"/></td>
+										<img width="80px" height="auto" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="image description"/></td>
 									<td className="product-details">
 										<h3 className="title">{eachAd.title}</h3>
 										<span className="add-id"><strong>Ad ID:</strong> {eachAd.id}</span>
