@@ -104,7 +104,7 @@ function Login() {
                                 </div>
 
                                 <div className="d-flex justify-content-around align-items-center mb-4">
-                                    <Link to="/admin/forgotpassword">Forgot password?</Link>
+                                    <Link to="{`${process.env.PUBLIC_URL}/admin/forgotpassword`}">Forgot password?</Link>
                                 </div>
                                 <button type="submit" className="btn btn-primary btn-sm btn-block">Sign in</button>
                                 {/* <button type="submit" onClick={()=>{handleLogin()}} className="btn btn-primary btn-sm btn-block">Sign in</button> */}

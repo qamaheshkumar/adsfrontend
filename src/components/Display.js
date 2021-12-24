@@ -263,7 +263,7 @@ function Display() {
 					allCategory.map((category, index) => {
 						return(
 							<li className="list-inline-item" key={index}>
-								<Link to={"/category-view/"+category.id} > {category.category}</Link>
+								<Link to={"{`${process.env.PUBLIC_URL}/category-view/`}"+category.id} > {category.category}</Link>
 							</li>
 						)
 					}
@@ -293,7 +293,7 @@ function Display() {
 										<div className="thumb-content">
 											{/* <div className="price">$200</div> */}
 											{eachAd.images?
-											<Link to={"/classified-view/"+eachAd.id}>
+											<Link to={"{`${process.env.PUBLIC_URL}/classified-view/`}"+eachAd.id}>
 												{/* <img className="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap"/> */}
 												<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="image description"/>
 											</Link>
@@ -301,7 +301,7 @@ function Display() {
 											}
 										</div>
 										<div className="card-body">
-											<h4 className="card-title"><Link to={"/classified-view/"+eachAd.id}>{eachAd.title}</Link></h4>
+											<h4 className="card-title"><Link to={"{`${process.env.PUBLIC_URL}/classified-view/`}"+eachAd.id}>{eachAd.title}</Link></h4>
 											<ul className="list-inline product-meta">
 												<li className="list-inline-item">
 													<i className="fa fa-folder-open-o"></i>{eachAd.district_id.district}

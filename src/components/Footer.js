@@ -25,9 +25,9 @@ function Footer() {
         <div className="block">
           <h4>Site Pages</h4>
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/aboutus">About Us</Link></li>
-            <li><Link to="/contactus">Contact Us</Link></li>
+            <li><Link to="{`${process.env.PUBLIC_URL}/`}">Home</Link></li>
+            <li><Link to="{`${process.env.PUBLIC_URL}/aboutus`}">About Us</Link></li>
+            <li><Link to="{`${process.env.PUBLIC_URL}/contactus`}">Contact Us</Link></li>
             {/* <li><a href="#">Home</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact Us</a></li> */}
