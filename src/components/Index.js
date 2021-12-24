@@ -33,30 +33,30 @@ function Index(props) {
     const [contextState, contextDispatch] = useReducer(reducer, initialState)
     return (
         <div>
-            <BrowserRouter basename={'/demo/sajan/adsfrontend/'}>
+            <BrowserRouter basename={'softcodelink.com/demo/sajan/adsfrontend/'}>
                 <UserContext.Provider value={{contextState, contextDispatch}}>
                 <Header></Header>
                 <Routes>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/category-view/:categoryId`}' element={<AdsCategory />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/classified-view/:addId`}' element={<ViewClassified />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/classified-edit/:addId`}' element={<UpdateClassified />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/adddistrict`}' element={<AddDistrict />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/addstate`}' element={<AddState />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/dashboard`}' element={<DashBoard />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/addcategory`}' element={<AddCategory />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/addstatus`}' element={<AddStatus />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/addclassifieds`}' element={<AddClassifieds />}></Route>                    
+                    <Route exact path='/category-view/:categoryId' element={<AdsCategory />}></Route>
+                    <Route exact path='/classified-view/:addId' element={<ViewClassified />}></Route>
+                    <Route exact path='/classified-edit/:addId' element={<UpdateClassified />}></Route>
+                    <Route exact path='/admin/adddistrict' element={<AddDistrict />}></Route>
+                    <Route exact path='/admin/addstate' element={<AddState />}></Route>
+                    <Route exact path='/admin/dashboard' element={<DashBoard />}></Route>
+                    <Route exact path='/admin/addcategory' element={<AddCategory />}></Route>
+                    <Route exact path='/admin/addstatus' element={<AddStatus />}></Route>
+                    <Route exact path='/admin/addclassifieds' element={<AddClassifieds />}></Route>                    
                     {/* <Route exact path='/adscategory' element={<AdsCategory />}></Route> */}
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/registration`}' element={<Registration />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/login`}' element={<Login />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/logout`}' element={<Logout />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/`}' element={< Display />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin`}' element={< Login />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/edit-dashboard`}' element={< EditDashBoard />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/contactus`}' element={< ContactUs />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/aboutus`}' element={< AboutUs />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/forgotpassword`}' element={< ForgotPassword />}></Route>
-                    <Route exact path='{`${process.env.PUBLIC_URL}/admin/adsBulkUpdate`}' element={< AdsBulkUpdate />}></Route>
+                    <Route exact path='/admin/registration' element={<Registration />}></Route>
+                    <Route exact path='/admin/login' element={<Login />}></Route>
+                    <Route exact path='/admin/logout' element={<Logout />}></Route>
+                    <Route exact path='/' element={< Display />}></Route>
+                    <Route exact path='/admin' element={< Login />}></Route>
+                    <Route exact path='/admin/edit-dashboard' element={< EditDashBoard />}></Route>
+                    <Route exact path='/contactus' element={< ContactUs />}></Route>
+                    <Route exact path='/aboutus' element={< AboutUs />}></Route>
+                    <Route exact path='/admin/forgotpassword' element={< ForgotPassword />}></Route>
+                    <Route exact path='/admin/adsBulkUpdate' element={< AdsBulkUpdate />}></Route>
                 </Routes>
                 <Footer></Footer>
                 </UserContext.Provider>

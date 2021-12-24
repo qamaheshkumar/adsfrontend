@@ -147,7 +147,7 @@ function DashBoard(){
 					</div>
 					<div className="widget user-dashboard-menu">
 						<ul>
-							<li className="active" ><Link to="{`${process.env.PUBLIC_URL}/admin/dashboard`}">
+							<li className="active" ><Link to="/admin/dashboard">
 								<i className="fa fa-user"></i> My Ads  <span>5</span></Link>
 							</li>
 							<li><a href=""><i className="fa fa-power-off"></i>Delete Account</a></li>
@@ -197,7 +197,7 @@ function DashBoard(){
 										<div className="">
 											<ul className="list-inline justify-content-center">
 												<li className="list-inline-item">
-													<Link to={"{`${process.env.PUBLIC_URL}/classified-view/`}"+eachAd.id} data-toggle="tooltip" data-placement="top" title="View Ad" className="view" >
+													<Link to={"/classified-view/"+eachAd.id} data-toggle="tooltip" data-placement="top" title="View Ad" className="view" >
 														<i className="fa fa-eye"></i>
 													</Link>
 												</li>
@@ -205,12 +205,12 @@ function DashBoard(){
 													{/* <a className="edit" href="">
 														<i className="fa fa-pencil"></i>
 													</a>		 */}
-													<Link className="edit" title="Edit Ad" to={"{`${process.env.PUBLIC_URL}/classified-edit/`}"+eachAd.id}>
+													<Link className="edit" title="Edit Ad" to={"/classified-edit/"+eachAd.id}>
 														<i className="fa fa-pencil"></i>
 													</Link>
 												</li>
 												<li className="list-inline-item">
-													<Link to="{`${process.env.PUBLIC_URL}/admin/dashboard`}" onClick={() => deleteClassified(eachAd.id)} className="delete" title="Delete Ad">
+													<Link to="/admin/dashboard" onClick={() => deleteClassified(eachAd.id)} className="delete" title="Delete Ad">
 														<i className="fa fa-trash"></i>
 													</Link>
 												</li>

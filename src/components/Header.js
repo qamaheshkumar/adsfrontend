@@ -103,16 +103,16 @@ function Header() {
                                     <Link className="nav-link" to=''>Home</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='{`${process.env.PUBLIC_URL}/aboutus`}'>About Us</Link>
+                                    <Link className="nav-link" to='/aboutus'>About Us</Link>
                                 </li>                                        
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='{`${process.env.PUBLIC_URL}/contactus`}'>Contact Us</Link>
+                                    <Link className="nav-link" to='/contactus'>Contact Us</Link>
                                 </li> 
                                 {/* {console.log('contextState 11 => ', userContextDetails.userId)} */}
                                 {contextState && userContextDetails.userId?
                                     <>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to='{`${process.env.PUBLIC_URL}/admin/dashBoard`}'>My Ads</Link>
+                                        <Link className="nav-link" to='/admin/dashBoard'>My Ads</Link>
                                     </li>    
                                     {/* <li className="nav-item">
                                         <Link className="nav-link" to='/adscategory'>Classifieds Category</Link>
@@ -123,13 +123,13 @@ function Header() {
                                         </Link>
                                         {/* Dropdown list */}
                                         <div className="dropdown-menu dropdown-menu-right">
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/registration`}'>Add New Admin User</Link>
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/addclassifieds`}'>Add Classifieds</Link>
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/addcategory`}'>Add Category</Link>
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/addstatus`}'>Add Status</Link>
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/addstate`}'>Add State</Link>
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/adddistrict`}'>Add District</Link>
-                                            <Link className="dropdown-item" to='{`${process.env.PUBLIC_URL}/admin/adsBulkUpdate`}'>Ads Bulk Hide</Link>
+                                            <Link className="dropdown-item" to='/admin/registration'>Add New Admin User</Link>
+                                            <Link className="dropdown-item" to='/admin/addclassifieds'>Add Classifieds</Link>
+                                            <Link className="dropdown-item" to='/admin/addcategory'>Add Category</Link>
+                                            <Link className="dropdown-item" to='/admin/addstatus'>Add Status</Link>
+                                            <Link className="dropdown-item" to='/admin/addstate'>Add State</Link>
+                                            <Link className="dropdown-item" to='/admin/adddistrict'>Add District</Link>
+                                            <Link className="dropdown-item" to='/admin/adsBulkUpdate'>Ads Bulk Hide</Link>
                                         </div>
                                     </li>
                                     <li className="nav-item">
@@ -141,7 +141,7 @@ function Header() {
                                     <li className="nav-item">
                                         {/* <a className="nav-link login-button" href="index.html">Login</a> */}
                                         {/* <Link className="nav-link login-button" to='/login'>Login</Link> */}
-                                        <Link className="btn btn-primary" to='{`${process.env.PUBLIC_URL}/admin/logout`}'>Logout</Link>
+                                        <Link className="btn btn-primary" to='/admin/logout'>Logout</Link>
                                     </li>
                                 </>
                                 : 
