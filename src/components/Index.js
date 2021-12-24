@@ -33,7 +33,7 @@ function Index(props) {
     const [contextState, contextDispatch] = useReducer(reducer, initialState)
     return (
         <div>
-            <BrowserRouter basename={'softcodelink.com/demo/sajan/adsfrontend/'}>
+            <BrowserRouter>
                 <UserContext.Provider value={{contextState, contextDispatch}}>
                 <Header></Header>
                 <Routes>
