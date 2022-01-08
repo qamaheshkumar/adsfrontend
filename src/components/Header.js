@@ -123,13 +123,14 @@ function Header() {
                                         </Link>
                                         {/* Dropdown list */}
                                         <div className="dropdown-menu dropdown-menu-right">
-                                            <Link className="dropdown-item" to='/admin/registration'>Add New Admin User</Link>
                                             <Link className="dropdown-item" to='/admin/addclassifieds'>Add Classifieds</Link>
                                             <Link className="dropdown-item" to='/admin/addcategory'>Add Category</Link>
                                             <Link className="dropdown-item" to='/admin/addstatus'>Add Status</Link>
                                             <Link className="dropdown-item" to='/admin/addstate'>Add State</Link>
                                             <Link className="dropdown-item" to='/admin/adddistrict'>Add District</Link>
                                             <Link className="dropdown-item" to='/admin/adsBulkUpdate'>Ads Bulk Hide</Link>
+                                            <Link className="dropdown-item" to='/admin/registration'>Add New Admin User</Link>
+                                            <Link className="dropdown-item" to='/admin/userreport'>Admin Users Report</Link>
                                         </div>
                                     </li>
                                     <li className="nav-item">

@@ -115,6 +115,10 @@ function AdsCategory() {
 			setAllClassifieds(filteredData)
 		}
 		// allClassifieds.
+	}
+	
+	const backToHomePage = (e) => {
+		history('/')
 	}	
 
 	const clearSearchText = (e) => {
@@ -207,6 +211,8 @@ function AdsCategory() {
 							""
 							}
 						</ul>
+
+						<button type="submit" onClick={backToHomePage} className="btn btn-main">Back To Home</button>
 					</div>
 					{/* <div className="short-popular-category-list text-center">
 						<h2>Popular Category</h2>

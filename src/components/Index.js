@@ -23,7 +23,7 @@ import AboutUs from './AboutUs';
 import ViewClassified from './ViewClassified';
 import ForgotPassword from './ForgotPassword';
 import AdsBulkUpdate from './AdsBulkUpdate';
-
+import UserReport from './UserReport';
 
 // import { UserContext } from "./UserContext.js";
 
@@ -57,6 +57,7 @@ function Index(props) {
                     <Route exact path='/aboutus' element={< AboutUs />}></Route>
                     <Route exact path='/admin/forgotpassword' element={< ForgotPassword />}></Route>
                     <Route exact path='/admin/adsBulkUpdate' element={< AdsBulkUpdate />}></Route>
+                    <Route exact path='/admin/userreport' element={< UserReport />}></Route>
                 </Routes>
                 <Footer></Footer>
                 </UserContext.Provider>
