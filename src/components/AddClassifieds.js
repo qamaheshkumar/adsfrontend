@@ -1,8 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {UserContext} from './UserContext';
 import { useNavigate} from 'react-router-dom';
-
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -17,8 +15,6 @@ function AddClassifieds() {
     const [allStatus, setAllStatus] = useState('');
     const [allState, setAllState] = useState('');
     const [allDistrict, setAllDistrict] = useState('');
-    const [allStatus1, setAllStatus1] = useState('');
-    const [isEditCategory, setIsEditCategory] = useState(false);
 
     const initialValues = {
         classified_title : "", 
@@ -83,7 +79,7 @@ function AddClassifieds() {
         formData.append('district_id', adsValues.classified_district_id);        
         formData.append('state_id', adsValues.classified_state_id);
         formData.append('phone_number', adsValues.classified_phonenum);
-        if(adsValues.classified_image != ''){
+        if(adsValues.classified_image !== ''){
             formData.append('images', adsValues.classified_image, adsValues.classified_image.name); 
         }
 
@@ -108,15 +104,15 @@ function AddClassifieds() {
     const axiosClassifiedResponse = async () => {
         const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
-        const allCategory = await categoryResponse.data
+        // const allCategory = await categoryResponse.data
 
         const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
         setAllStatus(statusResponse.data)
-        const allStatus = await statusResponse.data
+        // const allStatus = await statusResponse.data
 
         const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
-        const allState = await stateResponse.data
+        // const allState = await stateResponse.data
     }
 
     const onStateChange = async (stateValueId, setFieldValue) => {
@@ -139,7 +135,7 @@ function AddClassifieds() {
     return (
         <Formik initialValues={initialValues} validationSchema={adsSchema} onSubmit={(values) => {handleSubmitClick(values);}}>
             {(formik) => {
-                const { errors, touched, isValid, dirty, handleChange, setFieldValue, values } = formik;
+                const {handleChange, setFieldValue, values } = formik;
                 return (
                     <div className="container">
                         <Form>

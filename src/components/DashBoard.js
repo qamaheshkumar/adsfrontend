@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 function DashBoard(){
@@ -22,13 +22,15 @@ function DashBoard(){
     const axiosClassifiedResponse = async () => {
         await axios.get('http://55mahesh.pythonanywhere.com/api/classified-detail-byuser/'+user_detail.userId)
             .then((adsResponse) => {
-				if(searchText.length == 1){
+				if(searchText.length === 1){
 					setSerachText('')
 				}				
 				const filteredData = adsResponse.data.filter(item =>{
 					return Object.keys(item).some(key => {
 						if(item[key]){
 							return item[key].toString().toLowerCase().includes(searchText)
+						} else {
+							return false;
 						}
 					})
 				})
@@ -60,6 +62,8 @@ function DashBoard(){
 				return Object.keys(item).some(key => {
 					if(item[key]){
 						return item[key].toString().toLowerCase().includes(searchFieldText)
+					} else {
+						return false;
 					}
 				})
 			})
@@ -132,7 +136,7 @@ function DashBoard(){
 										return(
 											<tr key={index}>
 											<td className="product-thumb">
-												<img width="80px" height="auto" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="image description"/></td>
+												<img width="80px" height="auto" src={"http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="asaimage"/></td>
 											<td className="product-details">
 												<h3 className="title">{eachAd.title}</h3>
 												<span className="add-id"><strong>Ad ID:</strong> {eachAd.id}</span>

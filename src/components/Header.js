@@ -1,7 +1,7 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { useContext } from "react";
 import { UserContext } from "./UserContext.js";
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useEffect} from 'react';
 
 function Header() {
     const {contextState, contextDispatch } = useContext(UserContext);

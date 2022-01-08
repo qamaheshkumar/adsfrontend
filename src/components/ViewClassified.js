@@ -7,7 +7,6 @@ function ViewClassified(){
     const [allCategory, setAllCategory] = useState('');
     const [allStatus, setAllStatus] = useState('');
     const [allState, setAllState] = useState('');
-    const [allDistrict, setAllDistrict] = useState('');    
     const [updateAds, setUpdateAds] = useState('');
 
     const { addId } = useParams();
@@ -76,7 +75,7 @@ function ViewClassified(){
 
                     {updateAds.images ?
                     <div className="thumb-content">
-                            <img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="image description"/>
+                            <img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="adsimage"/>
                     </div>
                     : ''
                     }

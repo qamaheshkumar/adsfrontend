@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React, {useState} from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
@@ -7,13 +7,6 @@ import * as Yup from 'yup';
 
 
 function Registration() {
-    const [user_name, setUserName] = useState('');
-    const [first_name, setFirstName] = useState('');
-    const [last_name, setLastName] = useState('');
-    const [user_password, setUserPassword] = useState('');
-    const [user_email, setUserEmail] = useState('');
-    const [user_number, setUserNumber] = useState('');
-    const [user_is_admin, setIsAdmin] = useState("0");
     const history = useNavigate();
 
     const initialValues = {
@@ -57,7 +50,7 @@ function Registration() {
             'is_admin':userRegisterValues.user_is_admin
         }
 
-        const response = '';
+        // const response = '';
         var baseURL = 'http://55mahesh.pythonanywhere.com/api/user-create/'
         await axios
         .post(baseURL, userItems)

@@ -2,9 +2,9 @@ import Header from './Header'
 import Display from './Display'
 import Footer from './Footer'
 
-import {BrowserRouter, Route, Routes, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {UserContext} from './UserContext'
-import React, {useState, useEffect, useContext, useReducer} from 'react';
+import React, {useReducer} from 'react';
 
 import Login from './Login';
 import Logout from './Logout';
@@ -31,6 +31,7 @@ import {initialState, reducer} from '../components/reducer/UseReducer'
 
 function Index(props) {
     const [contextState, contextDispatch] = useReducer(reducer, initialState)
+    console.log = console.warn = console.error = () => {};
     return (
         <div>
             <BrowserRouter basename={'/demo/sajan/adsfrontend'}>

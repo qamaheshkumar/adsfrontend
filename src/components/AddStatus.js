@@ -19,7 +19,7 @@ function AddStatus() {
             });
             setIsEditStatus(false)
         } else {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/status-create/'
+            baseURL = 'http://55mahesh.pythonanywhere.com/api/status-create/'
             try{
                 await axios
                 .post(baseURL, {'status':addStatus.status})
@@ -51,7 +51,7 @@ function AddStatus() {
     const axiosStatusResponse = async () => {
         const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
         setAllStatus(statusResponse.data)
-        const allStatus = await statusResponse.data
+        // const allStatus = await statusResponse.data
     }
     
     useEffect(() => {

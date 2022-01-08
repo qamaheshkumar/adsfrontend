@@ -22,13 +22,15 @@ function AdsCategory() {
 		}
 		await axios.get(classifiedUrl)
 			.then((adsResponse) => {
-				if(searchText.length == 1){
+				if(searchText.length === 1){
 					setSerachText('')
 				}			
 				const filteredData = adsResponse.data.filter(item =>{
 					return Object.keys(item).some(key => {
-						if(item[key] && item['category_id']['id']==categoryId){
+						if(item[key] && item['category_id']['id']===categoryId){
 							return item[key].toString().toLowerCase().includes(searchText)
+						} else {
+							return false;
 						}
 					})
 				})				
@@ -57,6 +59,8 @@ function AdsCategory() {
 				return Object.keys(item).some(key => {
 					if(item[key]){
 						return item[key].toString().toLowerCase().includes(searchFieldText)
+					} else {
+						return false;
 					}		
 				})
 			})
@@ -77,10 +81,10 @@ function AdsCategory() {
 
     const axiosCategoryResponse = async () => {
         const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
-        setAllCategory(categoryResponse.data)
-		const allCategory = await categoryResponse.data
+        setAllCategory(await categoryResponse.data)
+		// const allCategory = await categoryResponse.data
 		const selectedCategory = allCategory.map(item =>{
-			if(item.id == categoryId){
+			if(item.id === categoryId){
 				return item.category	
 			}	
 		}).filter(function(elm){
@@ -163,7 +167,7 @@ function AdsCategory() {
 													<div className="thumb-content">
 														{eachAd.images?
 														<Link to={"/classified-view/"+eachAd.id}>
-															<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="image description"/>
+															<img className="card-img-top img-fluid" alt="adsimage" src={"http://55mahesh.pythonanywhere.com/media/"+eachAd.images} />
 														</Link>
 														: ''
 														}

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function Display() {
 
@@ -10,7 +10,6 @@ function Display() {
 	const [searchText, setSerachText] = useState('');
 	const [allCategory, setAllCategory] = useState('');
 	const [clearAllSearchText, setClearAllSearchText] = useState(false);
-	const history = useNavigate();
 
     const axiosClassifiedResponse = async (disctrictId) => {
 		setDisctrictId(disctrictId)
@@ -20,13 +19,15 @@ function Display() {
 		}
 		await axios.get(classifiedUrl)
 			.then((adsResponse) => {
-				if(searchText.length == 1){
+				if(searchText.length === 1){
 					setSerachText('')
 				}			
 				const filteredData = adsResponse.data.filter(item =>{
 					return Object.keys(item).some(key => {
 						if(item[key]){
 							return item[key].toString().toLowerCase().includes(searchText)
+						} else {
+							return false;
 						}
 					})
 				})				
@@ -55,6 +56,8 @@ function Display() {
 				return Object.keys(item).some(key => {
 					if(item[key]){
 						return item[key].toString().toLowerCase().includes(searchFieldText)
+					} else {
+						return false;
 					}		
 				})
 			})
@@ -72,7 +75,7 @@ function Display() {
     const axiosCategoryResponse = async () => {
         const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
-        const allCategory = await categoryResponse.data
+        // const allCategory = await categoryResponse.data
     }	
 
 	useEffect(() => {
@@ -171,7 +174,7 @@ function Display() {
 													<div className="thumb-content">
 														{eachAd.images?
 														<Link to={"/classified-view/"+eachAd.id}>
-															<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="image description"/>
+															<img className="card-img-top img-fluid" src={ "http://55mahesh.pythonanywhere.com/media/"+eachAd.images} alt="adsimage"/>
 														</Link>
 														: ''
 														}

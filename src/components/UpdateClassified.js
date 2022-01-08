@@ -165,7 +165,7 @@ function UpdateClassified() {
     return (
         <Formik enableReinitialize initialValues={initialValues} validationSchema={adsSchema} onSubmit={(values) => {handleUpdateSubmitClick(values);}}>
             {(formik) => {
-                const { errors, touched, isValid, dirty, handleChange, setFieldValue, values } = formik;
+                const { handleChange, setFieldValue, values } = formik;
                 return (
                     <div className="task-container">
                         <Form>
@@ -174,7 +174,7 @@ function UpdateClassified() {
                                     {updateAds.images ? 
                                     <div className="product-thumb">
                                         <label className="form-control-label" >Ad Image :</label>
-                                        <img width="500px" height="300px" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="image description"/>
+                                        <img width="500px" height="300px" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="adsimage"/>
                                     </div>
                                     : ''
                                     }
@@ -251,7 +251,7 @@ function UpdateClassified() {
                                             <ErrorMessage name="classified_phoneno" component="span" className="error" />
                                     </div>
                                     <div className="form-check">
-                                        <label className="form-control-label" >{updateAds.is_hide == 0?'This ad is hidden from users':'This ad is viewable from users'}</label>
+                                        <label className="form-control-label" >{updateAds.is_hide === 0?'This ad is hidden from users':'This ad is viewable from users'}</label>
                                         <p>Please do update while updating the Ad.</p>
                                     </div>                                    
                                     <div className="form-check">

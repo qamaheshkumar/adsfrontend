@@ -1,8 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
-import React, {useState, useContext, useReducer} from 'react';
+import React, {useContext} from 'react';
 import axios from 'axios';
 import { UserContext } from "./UserContext.js";
-import Header from './Header.js';
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -10,15 +9,12 @@ import * as Yup from 'yup';
 
 
 function Login() {
-    const [user_name, setUserName] = useState('');
-    const [user_password, setUserPassword] = useState('');
     const history = useNavigate();
     const {contextState, contextDispatch } = useContext(UserContext);
-    const initialState = {count: 0};
     const initialValues = { username: "", password: "" };
     const SignInSchema = Yup.object().shape({
-        username: Yup.string().required("user name is required").
-            matches(/^[a-zA-Z0-9]*$/),
+        username: Yup.string().required("user name is required")
+            .matches(/^[a-zA-Z0-9]*$/),
         password: Yup.string()
             .required("Password is required")
             .min(4, "Password is too short - should be 4 chars minimum")
@@ -27,7 +23,6 @@ function Login() {
 
 
     async function handleLogin(loginCredentials){
-        let userItems = {user_name, user_password}
         const response = '';
         let navigateTo = '';
 

@@ -10,7 +10,7 @@ function AddCategory() {
         requestAxios()
     }
 
-    const requestAxios = async () => {
+    const requestAxios = async () => {  
         if(isEditCategory) {
             var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-update/'+addCategory.id+'/'
             await axios
@@ -19,7 +19,7 @@ function AddCategory() {
             });
             setIsEditCategory(false)
         } else {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-create/'
+            baseURL = 'http://55mahesh.pythonanywhere.com/api/category-create/'
             try{
                 await axios
                 .post(baseURL, {'category':addCategory.category})
@@ -51,7 +51,7 @@ function AddCategory() {
     const axiosCategoryResponse = async () => {
         const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
-        const allCategory = await categoryResponse.data
+        // const allCategory = await categoryResponse.data
     }
     
     useEffect(() => {

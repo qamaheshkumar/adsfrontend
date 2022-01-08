@@ -9,8 +9,8 @@ function ForgotPassword() {
     const history = useNavigate();
     const initialValues = { username: "", password: "" };
     const SignInSchema = Yup.object().shape({
-        username: Yup.string().required("user name is required").
-            matches(/^[a-zA-Z0-9]*$/),
+        username: Yup.string().required("user name is required")
+            .matches(/^[a-zA-Z0-9]*$/),
         password: Yup.string()
             .required("Password is required")
             .min(4, "Password is too short - should be 4 chars minimum")

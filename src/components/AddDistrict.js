@@ -20,7 +20,7 @@ function AddDistrict() {
             });
             setIsEditDistrict(false)
         } else {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/district-create/'
+            baseURL = 'http://55mahesh.pythonanywhere.com/api/district-create/'
             try{
                 await axios
                 .post(baseURL, {'district':addDistrict.district, 'state_id':addDistrict.state_id})
@@ -54,11 +54,11 @@ function AddDistrict() {
     const axiosDistrictResponse = async () => {
         const districtResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/district-list/')
         setAllDistrict(districtResponse.data)
-        const allDistrict = await districtResponse.data
+        // const allDistrict = await districtResponse.data
 
         const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
-        const allState = await stateResponse.data
+        // const allState = await stateResponse.data
     }
     
     useEffect(() => {

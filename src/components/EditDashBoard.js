@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from "./UserContext.js";
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 
 function EditDashBoard(props){
     const {contextState, contextDispatch } = useContext(UserContext);    
-    let location = useLocation();
     const objLoggedInUserId = JSON.parse(contextState)
     const loggedInUserId = objLoggedInUserId.userId
     const [userDetail, setUserDetail] = useState('');

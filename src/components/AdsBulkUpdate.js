@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 
 
@@ -11,7 +10,8 @@ function AdsBulkUpdate() {
             await axios
             .get(baseURL)
             .then((response) => {
-            });
+                alert('Data successfully updated')
+        });
     }
 
     return (

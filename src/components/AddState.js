@@ -19,7 +19,7 @@ function AddState() {
             });
             setIsEditState(false)
         } else {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-create/'
+            baseURL = 'http://55mahesh.pythonanywhere.com/api/state-create/'
             try{
                 await axios
                 .post(baseURL, {'state':addState.state})
@@ -51,7 +51,7 @@ function AddState() {
     const axiosStateResponse = async () => {
         const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
-        const allState = await stateResponse.data
+        // const allState = await stateResponse.data
     }
     
     useEffect(() => {
