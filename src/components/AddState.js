@@ -2,13 +2,11 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 function AddState() {
-    console.log('State page')
     const [addState, setAddState] = useState({'id':'', 'state':''});
     const [allState, setAllState] = useState('');
     const [isEditState, setIsEditState] = useState(false);
 
    const handleState = () => {
-    //    e.preventDefault();
         requestAxios()
     }
 
@@ -18,7 +16,6 @@ function AddState() {
             await axios
             .put(baseURL, {'state':addState.state})
             .then((response) => {
-                console.log(response.data);
             });
             setIsEditState(false)
         } else {
@@ -27,7 +24,6 @@ function AddState() {
                 await axios
                 .post(baseURL, {'state':addState.state})
                 .then((response) => {
-                    console.log(response.data);
                 });                
             } catch (error) {
                 console.log(error)
@@ -39,18 +35,14 @@ function AddState() {
 
     const editState = (state) => {
         setIsEditState(true)    
-        console.log('status => ', state)    
         setAddState(state)
     }
 
     const deleteState = (state) => {
-        console.log("Div is delete clicked -> ", state)
         var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-delete/'+state.id+'/'
-        // alert(baseURL)
         axios
         .delete(baseURL)
         .then((response) => {
-            console.log(response.data);
             axiosStateResponse()
         });
         
@@ -60,7 +52,6 @@ function AddState() {
         const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
         setAllState(stateResponse.data)
         const allState = await stateResponse.data
-        console.log('allState ==> ', allState)
     }
     
     useEffect(() => {

@@ -2,13 +2,11 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 function AddCategory() {
-    console.log('Category page')
     const [addCategory, setAddCategory] = useState({'id':'', 'category':''});
     const [allCategory, setAllCategory] = useState('');
     const [isEditCategory, setIsEditCategory] = useState(false);
 
    const handleCategory = () => {
-    //    e.preventDefault();
         requestAxios()
     }
 
@@ -18,7 +16,6 @@ function AddCategory() {
             await axios
             .put(baseURL, {'category':addCategory.category})
             .then((response) => {
-                console.log(response.data);
             });
             setIsEditCategory(false)
         } else {
@@ -27,7 +24,6 @@ function AddCategory() {
                 await axios
                 .post(baseURL, {'category':addCategory.category})
                 .then((response) => {
-                    console.log(response.data);
                 });                
             } catch (error) {
                 console.log(error)
@@ -39,18 +35,14 @@ function AddCategory() {
 
     const editCategory = (category) => {
         setIsEditCategory(true)    
-        console.log('status => ', category)    
         setAddCategory(category)
     }
 
     const deleteCategory = (category) => {
-        console.log("Div is delete clicked -> ", category)
         var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-delete/'+category.id+'/'
-        // alert(baseURL)
         axios
         .delete(baseURL)
         .then((response) => {
-            console.log(response.data);
             axiosCategoryResponse()
         });
         
@@ -60,7 +52,6 @@ function AddCategory() {
         const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
         setAllCategory(categoryResponse.data)
         const allCategory = await categoryResponse.data
-        console.log('allCategory ==> ', allCategory)
     }
     
     useEffect(() => {

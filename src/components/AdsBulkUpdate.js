@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 function AdsBulkUpdate() {
-    console.log('District page')
     const [adsHideDays, setAdsHideDays] = useState('');
 
     const axiosBulkHideResponse = async () => {
@@ -12,15 +11,8 @@ function AdsBulkUpdate() {
             await axios
             .get(baseURL)
             .then((response) => {
-                console.log(response.data);
             });
-            // setIsEditDistrict(false)
     }
-
-    
-    // useEffect(() => {
-    //     axiosBulkHideResponse()
-    // }, [])
 
     return (
         <div className="container">

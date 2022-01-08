@@ -67,7 +67,6 @@ const columns = [
 
 function UserReport() {
 	const [usersListResponse, setUsersListResponse] = useState('');
-	// const history = useNavigate();
 
     const axiosUsersListResponse = async () => {
         const tempUsersListResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/user-list/')

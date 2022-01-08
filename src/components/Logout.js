@@ -6,7 +6,6 @@ function Logout() {
     const history = useNavigate();
     const {contextState, contextDispatch } = useContext(UserContext);
     const contextUserDetail = JSON.parse(contextState)
-    console.log('logout ', contextUserDetail.userId)
     useEffect(() => {
         if(contextUserDetail.userId){
             localStorage.setItem('user_detail', JSON.stringify({'userId':'', 'userName':''}));
@@ -16,14 +15,7 @@ function Logout() {
         }         
     })
 
-    // localStorage.clear()
-    // if(contextState.isLoggedIn){
-    //     localStorage.clear()
-    //     contextDispatch({type:'user', payload:{'isLoggedIn':false, 'userId':'', 'userName':''}});
-    // }
-
     function handleLogin(){
-        // history.push('/admin/login')
         history('/admin/login')
     }
 
