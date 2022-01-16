@@ -31,7 +31,7 @@ import {initialState, reducer} from '../components/reducer/UseReducer'
 
 function Index(props) {
     const [contextState, contextDispatch] = useReducer(reducer, initialState)
-    console.log = console.warn = console.error = () => {};
+    // console.log = console.warn = console.error = () => {};
     return (
         <div>
             <BrowserRouter basename={'/demo/sajan/adsfrontend'}>

@@ -80,17 +80,23 @@ function AdsCategory() {
 	}
 
     const axiosCategoryResponse = async () => {
-        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
-        setAllCategory(await categoryResponse.data)
-		// const allCategory = await categoryResponse.data
-		const selectedCategory = allCategory.map(item =>{
-			if(item.id === categoryId){
-				return item.category	
-			}	
-		}).filter(function(elm){
-			return elm !== undefined;
+		await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
+		.then ((categoryResponse) => {
+			setAllCategory(categoryResponse.data)
+			// console.log('allCategory => '+ allCategory)
+			// const selectedCategory = allCategory.map(item =>{
+			// 	if(item.id === categoryId){
+			// 		return item.category	
+			// 	}	
+			// }).filter(function(elm){
+			// 	return elm !== undefined;
+			// })
+			// setAdsCategory(selectedCategory[0])			
 		})
-		setAdsCategory(selectedCategory[0])
+		// console.log('allCategory => '+ allCategory)
+        // setAllCategory(await categoryResponse.data)
+		// const allCategory = await categoryResponse.data
+
     }	
 
 	useEffect(() => {
