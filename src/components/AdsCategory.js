@@ -3,7 +3,6 @@ import axios from 'axios';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 
 function AdsCategory() {
-
 	const { categoryId } = useParams();
 	const [allClassifieds, setAllClassifieds] = useState('');
 	const [disctrictId, setDisctrictId] = useState('0');
@@ -22,15 +21,13 @@ function AdsCategory() {
 		}
 		await axios.get(classifiedUrl)
 			.then((adsResponse) => {
-				if(searchText.length === 1){
+				if(searchText.length == 1){
 					setSerachText('')
 				}			
 				const filteredData = adsResponse.data.filter(item =>{
 					return Object.keys(item).some(key => {
-						if(item[key] && item['category_id']['id']===categoryId){
+						if(item[key] && item['category_id']['id']==categoryId){
 							return item[key].toString().toLowerCase().includes(searchText)
-						} else {
-							return false;
 						}
 					})
 				})				
@@ -59,17 +56,11 @@ function AdsCategory() {
 				return Object.keys(item).some(key => {
 					if(item[key]){
 						return item[key].toString().toLowerCase().includes(searchFieldText)
-					} else {
-						return false;
 					}		
 				})
 			})
 			setAllClassifieds(filteredData)
 		}
-	}
-	
-	const backToHomePage = (e) => {
-		history('/')
 	}	
 
 	const clearSearchText = (e) => {
@@ -80,23 +71,17 @@ function AdsCategory() {
 	}
 
     const axiosCategoryResponse = async () => {
-		await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
-		.then ((categoryResponse) => {
-			setAllCategory(categoryResponse.data)
-			// console.log('allCategory => '+ allCategory)
-			// const selectedCategory = allCategory.map(item =>{
-			// 	if(item.id === categoryId){
-			// 		return item.category	
-			// 	}	
-			// }).filter(function(elm){
-			// 	return elm !== undefined;
-			// })
-			// setAdsCategory(selectedCategory[0])			
+        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
+        setAllCategory(categoryResponse.data)
+		const allCategory = await categoryResponse.data
+		const selectedCategory = allCategory.map(item =>{
+			if(item.id == categoryId){
+				return item.category	
+			}	
+		}).filter(function(elm){
+			return elm !== undefined;
 		})
-		// console.log('allCategory => '+ allCategory)
-        // setAllCategory(await categoryResponse.data)
-		// const allCategory = await categoryResponse.data
-
+		setAdsCategory(selectedCategory[0])
     }	
 
 	useEffect(() => {
@@ -137,8 +122,6 @@ function AdsCategory() {
 										""
 										}
 									</ul>
-
-									<button type="submit" onClick={backToHomePage} className="btn btn-main">Back To Home</button>
 								</div>
 							</div>
 							<div className="advance-search">
@@ -159,7 +142,6 @@ function AdsCategory() {
 					</div>
 				</div>
 			</section>
-
 			<section className="popular-deals section bg-gray">
 				<div className="container">
 					<div className="row">
@@ -173,7 +155,7 @@ function AdsCategory() {
 													<div className="thumb-content">
 														{eachAd.images?
 														<Link to={"/classified-view/"+eachAd.id}>
-															<img className="card-img-top img-fluid" alt="adsimage" src={"http://55mahesh.pythonanywhere.com/media/"+eachAd.images} />
+															<img className="card-img-top img-fluid" src={ "http://127.0.0.1:8000"+eachAd.images} alt="image description"/>
 														</Link>
 														: ''
 														}
@@ -192,7 +174,7 @@ function AdsCategory() {
 															</li>
 														</ul>
 														<p className="card-text">{eachAd.description}</p>
-														<p className="card-text">Phone: {typeof eachAd.phone_number !=='undefined'?eachAd.phone_number:''}</p>
+														<p className="card-text">Phone: {eachAd.phone_number}</p>
 													</div>
 												</div>
 											</div>
