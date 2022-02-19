@@ -93,7 +93,7 @@ function Display() {
 	}
 	
 	function openWhatsApp(classifiedId) {  
-		window.open('whatsapp://send?text= classified-view/'+classifiedId);
+		window.open('whatsapp://send?text= http://www.softcodelink.com/demo/sajan/adsfrontend/classified-view/'+classifiedId);
 	} 	
 
     return (
