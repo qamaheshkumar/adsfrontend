@@ -103,7 +103,7 @@ function DashBoard(){
 							<div className="widget user-dashboard-menu">
 								<ul>
 									<li className="active" ><Link to="/admin/dashboard">
-										<i className="fa fa-user"></i> My Ads  <span>5</span></Link>
+										<i className="fa fa-user"></i> My Ads  <span>-</span></Link>
 									</li>
 									<li><a href=""><i className="fa fa-power-off"></i>Delete Account</a></li>
 								</ul>
@@ -151,7 +151,7 @@ function DashBoard(){
 												<div className="">
 													<ul className="list-inline justify-content-center">
 														<li className="list-inline-item">
-															<Link to={"/classified-view/"+eachAd.id} data-toggle="tooltip" data-placement="top" title="View Ad" className="view" >
+															<Link target={"_blank"}  to={"/classified-view/"+eachAd.id} data-toggle="tooltip" data-placement="top" title="View Ad" className="view" >
 																<i className="fa fa-eye"></i>
 															</Link>
 														</li>

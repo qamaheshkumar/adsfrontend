@@ -38,9 +38,9 @@ function ViewClassified(){
         <div className="container">
             <div  className="col-md-8">
                 <label className="form-label" ><h3>Classified Details :</h3></label>                   
-                    <div style={{flex: 1}}>
+                    {/* <div style={{flex: 1}}>
                         <button onClick={returnToPrev} className="btn btn-primary">Back</button>
-                    </div> 
+                    </div>  */}
                     <div style={{flex: 6}} className="form-group">
                     <label className="form-control-label" >Ad Title :</label>    
                         <label className="form-control-label">{updateAds?updateAds.title:''}</label>

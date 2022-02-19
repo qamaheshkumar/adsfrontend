@@ -187,7 +187,7 @@ function Display() {
 														}
 													</div>
 													<div className="card-body">
-														<h4 className="card-title"><Link to={"/classified-view/"+eachAd.id}>{eachAd.title}</Link></h4>
+														<h4 className="card-title"><Link target={"_blank"} to={"/classified-view/"+eachAd.id}>{eachAd.title}</Link></h4>
 														<p className="card-text">{eachAd.description}</p>
 														<p className="card-text">Phone: {typeof eachAd.phone_number !=='undefined'? <a href={'tel:+91'+eachAd.phone_number}>{eachAd.phone_number}</a> :''}</p>
 														<ul className="list-inline product-meta">
