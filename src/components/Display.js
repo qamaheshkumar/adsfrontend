@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+// import { DistrictContext } from "./UserContext.js";
 
 function Display() {
 
@@ -10,6 +11,7 @@ function Display() {
 	const [searchText, setSerachText] = useState('');
 	const [allCategory, setAllCategory] = useState('');
 	const [clearAllSearchText, setClearAllSearchText] = useState(false);
+	// const {contextState, contextDispatch } = useContext(UserContext);
 
     const axiosClassifiedResponse = async (disctrictId) => {
 		setDisctrictId(disctrictId)
@@ -86,8 +88,13 @@ function Display() {
 	
 	const getDistValue = (disctrictId) => {
 		setDisctrictId(disctrictId)
+		// contextDispatch({type:'district', payload:{'disctrictId':disctrictId}})
 		axiosClassifiedResponse(disctrictId)
-	}	
+	}
+	
+	function openWhatsApp(classifiedId) {  
+		window.open('whatsapp://send?text= classified-view/'+classifiedId);
+	} 	
 
     return (
         <div>
@@ -193,6 +200,9 @@ function Display() {
 															<li className="list-inline-item">
 																<i className="fa fa-calendar"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10) }
 															</li>
+															<li className="list-inline-item">
+																<i className="fa fa-whatsapp fa_custom fa-2x" onClick={()=>openWhatsApp(eachAd.id)}/>
+															</li>															
 														</ul>											
 													</div>
 												</div>

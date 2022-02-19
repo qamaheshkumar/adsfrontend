@@ -23,7 +23,7 @@ function AdsCategory() {
 			.then((adsResponse) => {
 				if(searchText.length == 1){
 					setSerachText('')
-				}			
+				}
 				const filteredData = adsResponse.data.filter(item =>{
 					return Object.keys(item).some(key => {
 						if(item[key] && item['category_id']['id']==categoryId){
@@ -43,8 +43,6 @@ function AdsCategory() {
 			}
 		)
     }	
-
-
 
 	const handleChange = (searchFieldText) => {
 		setSerachText(searchFieldText)
@@ -71,17 +69,21 @@ function AdsCategory() {
 	}
 
     const axiosCategoryResponse = async () => {
-        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
-        setAllCategory(categoryResponse.data)
-		const allCategory = await categoryResponse.data
-		const selectedCategory = allCategory.map(item =>{
-			if(item.id == categoryId){
-				return item.category	
-			}	
-		}).filter(function(elm){
-			return elm !== undefined;
+		await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
+		.then((categoryResponse) => {
+			setAllCategory(categoryResponse.data)
 		})
-		setAdsCategory(selectedCategory[0])
+		// const allCategory = await categoryResponse.data
+		if(allCategory){
+			const selectedCategory = allCategory.map(item =>{
+				if(item.id == categoryId){
+					return item.category	
+				}	
+			}).filter(function(elm){
+				return elm !== undefined;
+			})
+			setAdsCategory(selectedCategory[0])
+		}
     }	
 
 	useEffect(() => {
@@ -93,8 +95,12 @@ function AdsCategory() {
 	const getDistValue = (disctrictId) => {
 		setDisctrictId(disctrictId)
 		axiosClassifiedResponse(disctrictId)
-	}	
+	}
 
+	const backToHomePage = (e) => {
+		history('/')
+	}
+	
     return (
         <div>
 			<section className="hero-area bg-1 text-center overly">
@@ -122,6 +128,7 @@ function AdsCategory() {
 										""
 										}
 									</ul>
+									<button type="submit" onClick={backToHomePage} className="btn btn-main">Back To Home</button>
 								</div>
 							</div>
 							<div className="advance-search">

@@ -45,8 +45,7 @@ function Footer() {
                     <ul className="social-media-icons text-right">
                         <li><Link className="fa fa-facebook" to=""></Link></li>
                         <li><Link className="fa fa-twitter" to=""></Link></li>
-                        <li><Link className="fa fa-pinterest-p" to=""></Link></li>
-                        <li><Link className="fa fa-vimeo" to=""></Link></li>
+                        <li><Link className="fa fa-whatsapp" to=""></Link></li>
                       </ul>
                   </div>
                 </div>
