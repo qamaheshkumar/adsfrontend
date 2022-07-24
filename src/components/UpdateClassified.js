@@ -1,15 +1,21 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import draftToHtml from 'draftjs-to-html';
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { ContentState, convertToRaw, EditorState, convertFromRaw } from 'draft-js';
 
 function UpdateClassified() {
     const pathHistory = useNavigate()
     const [addClassifieds, setClassifieds] = useState(
-        {'id':'', 'title':'', 'description':'', 'images':'', 'state_id':'', 'district_id':'', 'zip_code':'',
-        'category_id':'', 'status_id':'', 'users_id':'1', 'is_hide':'', 'phone_number':''}
+        {
+            'id': '', 'title': '', 'description': '', 'images': '', 'state_id': '', 'district_id': '', 'zip_code': '',
+            'category_id': '', 'status_id': '', 'users_id': '1', 'is_hide': '', 'phone_number': ''
+        }
     );
     const [allCategory, setAllCategory] = useState('');
     const [allStatus, setAllStatus] = useState('');
@@ -17,8 +23,9 @@ function UpdateClassified() {
     const [allDistrict, setAllDistrict] = useState('');
     const [updateAds, setUpdateAds] = useState('');
     const [isEditCategory, setIsEditCategory] = useState(false);
-    const user_detail= JSON.parse(localStorage.getItem('user_detail'));
+    const user_detail = JSON.parse(localStorage.getItem('user_detail'));
     const { addId } = useParams();
+    const [imgPath, setImagePath] = useState('');
 
     const handleUpdateSubmitClick = (updateAdsValues) => {
         axiosAddClassifiedResponse(updateAdsValues)
@@ -26,39 +33,42 @@ function UpdateClassified() {
 
     const onStateChange = async (stateValueId) => {
     
-    await axios.get('http://55mahesh.pythonanywhere.com/api/state_dist-detail/'+stateValueId+'/')
+        await axios.get('https://www.janathads.com/api/state_dist-detail/' + stateValueId + '/')
         .then((districResponse) => {
             setAllDistrict(districResponse.data)
-        }
-    )
-}
+            }
+        )
+    }
 
     let initialValues = {
-        classified_title : updateAds.title,
-        classified_desc : updateAds.description,
-        classified_image : updateAds.images,
-        classified_category_id : updateAds.category_id,
-        classified_status_id : updateAds.status_id,        
-        classified_state_id : updateAds.state_id,
-        classified_district_id : updateAds.district_id,
-        classified_zipcode : updateAds.zip_code,
-        classified_users_id : user_detail.userId,
-        classified_phoneno : updateAds.phone_number,
-        classified_is_hide : '',
+        classified_title: updateAds.title ? updateAds.title : '',
+        classified_desc: convertToRaw(ContentState.createFromText('-')),
+        // classified_desc: convertToRaw(ContentState.createFromText( String(updateAds.description ? (updateAds.description).replace(/<\/?[^>]+(>|$)/g, "") : ''))),
+        classified_image: updateAds.images,
+        classified_category_id: updateAds.category_id,
+        classified_status_id: updateAds.status_id,
+        classified_state_id: updateAds.state_id,
+        classified_district_id: updateAds.district_id,
+        classified_zipcode: updateAds.zip_code,
+        classified_users_id: user_detail.userId,
+        classified_phoneno: updateAds.phone_number,
+        classified_is_hide: '',
     };
-    if(isEditCategory){
+    if (isEditCategory) {
         initialValues = {
-            classified_title : updateAds.title,
-            classified_desc : updateAds.description,
-            classified_image : updateAds.images,
-            classified_category_id : updateAds.category_id.id,
-            classified_status_id : updateAds.status_id.id,        
-            classified_state_id : updateAds.state_id.id,
-            classified_district_id : updateAds.district_id.id,
-            classified_zipcode : updateAds.zip_code,
-            classified_users_id : user_detail.userId,
-            classified_phoneno : updateAds.phone_number,
-            classified_is_hide : '',
+            classified_title: updateAds.title ? updateAds.title : '',
+            // classified_desc: convertToRaw(ContentState.createFromText(updateAds.description ? (updateAds.description).replace(/<\/?[^>]+(>|$)/g, "") : '')),
+            classified_desc: convertToRaw(ContentState.createFromText('-')),
+            // classified_desc: updateAds.description ? ((updateAds.description)) : '',
+            classified_image: updateAds.images,
+            classified_category_id: updateAds.category_id.id,
+            classified_status_id: updateAds.status_id.id,
+            classified_state_id: updateAds.state_id.id,
+            classified_district_id: updateAds.district_id.id,
+            classified_zipcode: updateAds.zip_code,
+            classified_users_id: user_detail.userId,
+            classified_phoneno: updateAds.phone_number,
+            classified_is_hide: '',
         };
     }
 
@@ -67,17 +77,17 @@ function UpdateClassified() {
 
     const adsSchema = Yup.object().shape({
         classified_title: Yup.string().required("User name is required")
-            .min(5, "Minimum characters required are 7")
-            .max(20, "Maximum characters required are 20"),
+            .min(1, "Minimum characters required are 1"),
+            // .max(20, "Maximum characters required are 20"),
         classified_desc: Yup.string().required("First name is required")
-            .min(5, "Minimum characters required are 7")
-            .max(100, "Maximum characters required are 20"),
+            .min(1, "Minimum characters required are 1"),
+            // .max(100, "Maximum characters required are 20"),
         classified_image: Yup.mixed()
             .when({
-                is : (value) => typeof value==='string',
-                then : Yup.string().test("file_format", "Uploaded 11 file has unsupported format.", value => value.length <= 60),
-            otherwise : Yup.mixed()
-                .test("file_size", "Uploaded file is too big.", value => !value || (value && value.size <= 150000))
+                is: (value) => typeof value === 'string',
+                then: Yup.string().test("file_format", "Uploaded 11 file has unsupported format.", value => value.length <= 60),
+                otherwise: Yup.mixed()
+                .test("file_size", "Uploaded file is too big.", value => !value || (value && value.size <= 15000000))
                 .test("file_format", "Uploaded file has unsupported format.", value => !value || (value && SUPPORTED_FORMATS.includes(value.type))),
             }),
         classified_category_id: Yup.string().required("Please select category")
@@ -95,7 +105,7 @@ function UpdateClassified() {
 
     const axiosAddClassifiedResponse = async (updateAdsValues) => {
         const formData = new FormData();
-        if(updateAdsValues.classified_image && updateAdsValues.classified_image.name){
+        if (updateAdsValues.classified_image && updateAdsValues.classified_image.name) {
             formData.append('images', updateAdsValues.classified_image, updateAdsValues.classified_image.name);
         }
         formData.append('title', updateAdsValues.classified_title);
@@ -111,13 +121,12 @@ function UpdateClassified() {
         const headers = {
             "content-type": "multipart/form-data",
         }
-
-        let baseURL = 'http://55mahesh.pythonanywhere.com/api/classified-update/'+addId+'/'
-        try{
+        let baseURL = 'https://www.janathads.com/api/classified-update/' + addId + '/'
+        try {
             await axios
-            .put(baseURL, formData, {headers})
+                .put(baseURL, formData, { headers })
             .then((response) => {
-                pathHistory('/admin/dashboard')
+                    pathHistory('/superadmin/dashboard')
             });                
         } catch (error) {
             console.log(error)
@@ -128,25 +137,25 @@ function UpdateClassified() {
         const headers = {
             "content-type": "multipart/form-data",
         }        
-        await axios.get('http://55mahesh.pythonanywhere.com/api/classified-edit/'+addId+'/', {headers})
-        .then((classifiedResponse) =>{
+        await axios.get('https://www.janathads.com/api/classified-edit/' + addId + '/', { headers })
+            .then((classifiedResponse) => {
             setUpdateAds(classifiedResponse.data)
             setIsEditCategory(true)
         })
     }    
     
     const axiosClassifiedOtherResponse = async () => {
-        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
+        const categoryResponse = await axios.get('https://www.janathads.com/api/category-list/')
         setAllCategory(categoryResponse.data)
 
-        const statusResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/status-list/')
+        const statusResponse = await axios.get('https://www.janathads.com/api/status-list/')
         setAllStatus(statusResponse.data)
 
-        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
+        const stateResponse = await axios.get('https://www.janathads.com/api/state-list/')
         setAllState(stateResponse.data)
     }
 
-    function returnToPrev(){
+    function returnToPrev() {
         pathHistory(-1)
     }    
 
@@ -154,122 +163,146 @@ function UpdateClassified() {
     useEffect(() => {
         axiosClassifiedResponse()
         axiosClassifiedOtherResponse()
-        if(isEditCategory){
+        setImagePath(initialValues.classified_image)
+        if (isEditCategory) {
             onStateChange(updateAds.state_id.id)
         }
         
 
     }, [isEditCategory])
 
-
     return (
-        <Formik enableReinitialize initialValues={initialValues} validationSchema={adsSchema} onSubmit={(values) => {handleUpdateSubmitClick(values);}}>
+        <Formik enableReinitialize initialValues={initialValues} validationSchema={adsSchema} onSubmit={(values) => { handleUpdateSubmitClick(values); }}>
             {(formik) => {
                 const { handleChange, setFieldValue, values } = formik;
                 return (
-                    <div className="task-container">
+                    <div className="task-container container py-5">
                         <Form>
-                            <div className="col-md-12">
-                                <label className="form-label" ><h3>Update Classified Here...</h3></label>                   
+                            <div className="col-md-8">
+                                <h3 className="linetitle mb-4">Update Classified Here...</h3>
+                                <div className="form-group">
+                                    <Field className="form-control" id="classified_title" type="text" name="classified_title" placeholder="ad title" />
+                                    <ErrorMessage name="classified_title" component="span" className="error small text-danger" />
+                                </div>
+                                <div className="form-group">
+                                    {/* <Field className="form-control" id="classified_desc" type="text" name="classified_desc" placeholder="ad title" /> */}
+                                    <Editor
+                                        editorStyle={{ height: '200px' }}
+                                        className="form-control"
+                                        id="classified_desc"    
+                                        // type="text" 
+                                        name="classified_desc"
+                                        defaultContentState={initialValues.classified_desc}
+                                        // defaultContentState={updateAds.description}
+                                        onContentStateChange={(editorState) => 
+                                            // console.log('editorState => ', editorState)
+                                            setFieldValue("classified_desc", draftToHtml(editorState))
+                                        }
+                                    />                                            
+                                    <ErrorMessage name="classified_desc" component="span" className="error small text-danger" />
+                                </div>
+                                <div className="form-group">
+
+                                </div>
+
+                                <div className="form-group">
+                                    <div className="custom-file">
+                                        <label className="custom-file-label" for="classified_image" >{imgPath !=='' ? imgPath : 'Upload ads image here'}</label><label className="custom-file-label" for="classified_image" >{imgPath !=='' ? imgPath : ''}</label>
+                                        <input className="custom-file-input" id="classified_image" onChange={(e) => {setFieldValue("classified_image", e.target.files[0]) ; setImagePath(e.target.files[0].name)} } type="file" accept="image/png, image/jpeg" name="classified_image" />
+                                        <ErrorMessage name="classified_image" component="span" className="error small text-danger" />
+                                    </div>
+                                </div>
                                     {updateAds.images ? 
-                                    <div className="product-thumb">
-                                        <label className="form-control-label" >Ad Image :</label>
-                                        <img width="500px" height="300px" src={ "http://55mahesh.pythonanywhere.com/media/"+updateAds.images} alt="adsimage"/>
+                                    <div className="form-group product-thumb">
+                                        <label className="form-control-label">Ad Image :</label>
+                                        <img src={"https://www.janathads.com/media/" + updateAds.images} alt="adsimage" className="img-fluid" />
                                     </div>
                                     : ''
                                     }
-                                    <div style={{flex: 6}} className="form-group">
-                                        <Field className="form-control" id="classified_title" type="text" name="classified_title" placeholder="ad title"/>
-                                            <ErrorMessage name="classified_title" component="span" className="error" />
-                                    </div>
-                                    <div style={{flex: 6}} className="form-group">
-                                        <Field className="form-control" id="classified_desc" type="text" name="classified_desc" placeholder="ad title"/>
-                                            <ErrorMessage name="classified_desc" component="span" className="error" />
-                                    </div>
-                                    <div style={{flex: 6}} className="form-group">
-                                        <input className="form-control" id="classified_image" onChange={(e) => setFieldValue("classified_image", e.target.files[0])} type="file" accept="image/png, image/jpeg" name="classified_image"/>
-                                            <ErrorMessage name="classified_image" component="span" className="error" />
-                                    </div>                                        
-                                    <div style={{flex: 6}} className="form-group">
+
+                                <div className="form-group">
                                         <label className="form-control-label" >Ad Category :</label>
-                                            <Field as="select" name="classified_category_id">
-                                                {isEditCategory && allCategory?
-                                                    allCategory.map((category, index) =>{
-                                                        if(values.classified_category_id.id !== category.id){
+                                    <Field as="select" name="classified_category_id" className="custom-select">
+                                        {isEditCategory && allCategory ?
+                                            allCategory.map((category, index) => {
+                                                if (values.classified_category_id.id !== category.id) {
                                                             return <option key={index} value={category.id}>{category.category}</option>
                                                         }
                                                     }) : <option >none</option>
                                                 }
                                             </Field>
-                                                <ErrorMessage name="classified_category_id" component="span" className="error" />
+                                    <ErrorMessage name="classified_category_id" component="span" className="error small text-danger" />
                                     </div>
-                                    <div style={{flex: 6}} className="form-group">
+                                <div className="form-group">
                                         <label className="form-control-label" >Ad Status :</label>
-                                            <Field as="select" name="classified_status_id" >
-                                                {isEditCategory && allStatus?
-                                                    allStatus.map((status, index) =>{
-                                                        if(values.classified_status_id.id !== status.id){
+                                    <Field as="select" name="classified_status_id" className="custom-select">
+                                        {isEditCategory && allStatus ?
+                                            allStatus.map((status, index) => {
+                                                if (values.classified_status_id.id !== status.id) {
                                                             return <option key={index} value={status.id}>{status.status}</option>
                                                         }    
                                                     }) : <option >none</option>
                                                 }
                                             </Field>
-                                                <ErrorMessage name="classified_status_id" component="span" className="error" />
+                                    <ErrorMessage name="classified_status_id" component="span" className="error small text-danger" />
                                     </div>
 
-                                    <div style={{flex: 6}} className="form-group">
+                                <div className="form-group">
                                         <label className="form-control-label" >Ad Location State :</label>
-                                            <Field as="select" name="classified_state_id" onChange={(e) => { handleChange(e);  onStateChange(e.target.value, setFieldValue); }}>
-                                            {isEditCategory && allState?
-                                                allState.map((state, index) =>{
-                                                    if(values.classified_state_id.id !== state.id){
+                                    <Field as="select" name="classified_state_id" onChange={(e) => { handleChange(e); onStateChange(e.target.value, setFieldValue); }} className="custom-select">
+                                        {isEditCategory && allState ?
+                                            allState.map((state, index) => {
+                                                if (values.classified_state_id.id !== state.id) {
                                                         return <option key={index} value={state.id}>{state.state}</option>
                                                     }
                                                 }) : <option >none</option>
                                             }
                                             </Field>
-                                                <ErrorMessage name="classified_state_id" component="span" className="error" />
+                                    <ErrorMessage name="classified_state_id" component="span" className="error small text-danger" />
                                     </div>
-                                    <div style={{flex: 6}} className="form-group">
+                                <div className="form-group">
                                         <label className="form-control-label" >Ad Location District :</label>
-                                            <Field as="select" name="classified_district_id" >
-                                            {allDistrict?
-                                                allDistrict.map((district, index) =>{
+                                    <Field as="select" name="classified_district_id" className="custom-select">
+                                        {allDistrict ?
+                                            allDistrict.map((district, index) => {
                                                         return <option key={index} value={district.id}>{district.district}</option>
                                                 }) : <option >none</option>
                                             }
                                             </Field>
-                                                <ErrorMessage name="classified_district_id" component="span" className="error" />
+                                    <ErrorMessage name="classified_district_id" component="span" className="error small text-danger" />
                                     </div>                                    
-                                    <div style={{flex: 6}} className="form-group">
-                                        <Field className="form-control" id="classified_zipcode" type="text" name="classified_zipcode" placeholder="zip code"/>
-                                            <ErrorMessage name="classified_zipcode" component="span" className="error" />
+                                <div className="form-group">
+                                    <Field className="form-control" id="classified_zipcode" type="text" name="classified_zipcode" placeholder="zip code" />
+                                    <ErrorMessage name="classified_zipcode" component="span" className="error small text-danger" />
                                     </div>
 
-                                    <div style={{flex: 6}} className="form-group">
-                                        <Field className="form-control" id="classified_phoneno" type="text" name="classified_phoneno" placeholder="phone number"/>
-                                            <ErrorMessage name="classified_phoneno" component="span" className="error" />
+                                <div className="form-group">
+                                    <Field className="form-control" id="classified_phoneno" type="text" name="classified_phoneno" placeholder="phone number" />
+                                    <ErrorMessage name="classified_phoneno" component="span" className="error small text-danger" />
                                     </div>
-                                    <div className="form-check">
-                                        <label className="form-control-label" >{updateAds.is_hide === 0?'This ad is hidden from users':'This ad is viewable from users'}</label>
+                                <div className="form-group">
+                                    <label className="form-control-label" >{updateAds.is_hide === 0 ? 'This ad is hidden from users' : 'This ad is viewable from users'}</label>
                                         <p>Please do update while updating the Ad.</p>
                                     </div>                                    
-                                    <div className="form-check">
-                                        <label className="form-control-label" >is hide</label>
-                                            <Field id="classified_is_hide" type="radio" name="classified_is_hide" value="0"/>
+
+
+                                <div className="form-group">
+                                    <div className="custom-control custom-radio custom-control-inline">
+                                        <Field id="classified_is_hide" type="radio" name="classified_is_hide" value="0" className="custom-control-input" />
+                                        <label className="custom-control-label" for="classified_is_hide">Is hide</label>
                                     </div>
-                                    <div className="form-check">
-                                        <label className="form-control-label" >Un hide</label>
-                                            <Field id="classified_is_hide" type="radio" name="classified_is_hide" value="1"/>
-                                                <ErrorMessage name="classified_is_hide" component="span" className="error" />
+                                    <div className="custom-control custom-radio custom-control-inline">
+                                        <Field id="classified_un_hide" type="radio" name="classified_is_hide" value="1" className="custom-control-input" />
+                                        <label className="custom-control-label" for="classified_un_hide">Un hide</label>
+                                        <ErrorMessage name="classified_is_hide" component="span" className="error small text-danger" />
+                                    </div>
                                     </div>    
 
-                                    <div style={{flex: 1}}>
+                                <div>
+
+                                    <button onClick={returnToPrev} className="btn btn-secondary mr-3">Back</button>
                                         <button type="submit" className="btn btn-primary">Submit</button>
                                     </div>
-                                    <div style={{flex: 1}}>
-                                        <button onClick={returnToPrev} className="btn btn-primary">Back</button>
-                                    </div>                                    
                             </div>
                         </Form>
                     </div>

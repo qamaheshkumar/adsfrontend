@@ -1,26 +1,26 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 // import {Link} from 'react-router-dom';
-import DataTable  from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 
 const columns = [
-    {
-        name: 'id',
+	{
+		name: 'ID',
 		selector: row => row.id,
 		sortable: true,
-    },
-    {
-        name: 'user_name',
+	},
+	{
+		name: 'Username',
 		selector: row => row.user_name,
 		sortable: true,
 	},
 	{
-		name: 'first_name',
+		name: 'First name',
 		selector: row => row.first_name,
 		sortable: true,
 	},
-    {
-        name: 'last_name',
+	{
+		name: 'Last name',
 		selector: row => row.last_name,
 		sortable: true,
 	},
@@ -29,18 +29,18 @@ const columns = [
 	// 	selector: row => row.user_password,
 	// 	sortable: true,
 	// },
-    {
-        name: 'user_email',
+	{
+		name: 'User email',
 		selector: row => row.user_email,
 		sortable: true,
 	},
 	{
-		name: 'user_number',
+		name: 'User number',
 		selector: row => row.user_number,
 		sortable: true,
 	},
-    // {
-    //     name: 'is_admin',
+	// {
+	//     name: 'is_admin',
 	// 	selector: row => row.is_admin,
 	// 	sortable: true,
 	// },
@@ -68,30 +68,35 @@ const columns = [
 function UserReport() {
 	const [usersListResponse, setUsersListResponse] = useState('');
 
-    const axiosUsersListResponse = async () => {
-        const tempUsersListResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/user-list/')
-        setUsersListResponse(tempUsersListResponse.data)
-    }	
+	const axiosUsersListResponse = async () => {
+		const tempUsersListResponse = await axios.get('https://www.janathads.com/api/user-list/')
+		setUsersListResponse(tempUsersListResponse.data)
+	}
 
 	useEffect(() => {
 		axiosUsersListResponse()
 	}, [])
 
-    return (
-        <div>
+	return (
+		<div>
 			<section className="popular-deals section bg-gray">
-				<div className="container">
-				<DataTable title="Admin Users List" 
-					columns={columns} 
-					data={usersListResponse} 
-					pagination 
-				/>	
+				<div className="container py-5">
+					<h4 className="linetitle mb-4">Admin Users List</h4>
+					<div className="row">
+						<div className="col-md-12">
+							<DataTable
+								columns={columns}
+								data={usersListResponse}
+								pagination
+							/>
+						</div>
+					</div>
 
-				</div> 
+				</div>
 			</section>
-        </div>
-    )
-      
-  }
+		</div>
+	)
+
+}
 
 export default UserReport;

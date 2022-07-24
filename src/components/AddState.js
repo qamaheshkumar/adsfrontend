@@ -1,107 +1,95 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AddState() {
-    const [addState, setAddState] = useState({'id':'', 'state':''});
+    const [addState, setAddState] = useState({ 'id': '', 'state': '' });
     const [allState, setAllState] = useState('');
     const [isEditState, setIsEditState] = useState(false);
 
-   const handleState = () => {
+    const handleState = () => {
         requestAxios()
     }
 
     const requestAxios = async () => {
-        if(isEditState) {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-update/'+addState.id+'/'
+        if (isEditState) {
+            var baseURL = 'https://www.janathads.com/api/state-update/' + addState.id + '/'
             await axios
-            .put(baseURL, {'state':addState.state})
-            .then((response) => {
-            });
+                .put(baseURL, { 'state': addState.state })
+                .then((response) => {
+                });
             setIsEditState(false)
         } else {
-            baseURL = 'http://55mahesh.pythonanywhere.com/api/state-create/'
-            try{
+            baseURL = 'https://www.janathads.com/api/state-create/'
+            try {
                 await axios
-                .post(baseURL, {'state':addState.state})
-                .then((response) => {
-                });                
+                    .post(baseURL, { 'state': addState.state })
+                    .then((response) => {
+                    });
             } catch (error) {
                 console.log(error)
-            }    
+            }
         }
-        setAddState({'id':'', 'state':''});
+        setAddState({ 'id': '', 'state': '' });
         axiosStateResponse()
     }
 
     const editState = (state) => {
-        setIsEditState(true)    
+        setIsEditState(true)
         setAddState(state)
     }
 
     const deleteState = (state) => {
-        var baseURL = 'http://55mahesh.pythonanywhere.com/api/state-delete/'+state.id+'/'
+        var baseURL = 'https://www.janathads.com/api/state-delete/' + state.id + '/'
         axios
-        .delete(baseURL)
-        .then((response) => {
-            axiosStateResponse()
-        });
-        
-    }    
+            .delete(baseURL)
+            .then((response) => {
+                axiosStateResponse()
+            });
+
+    }
 
     const axiosStateResponse = async () => {
-        const stateResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/state-list/')
+        const stateResponse = await axios.get('https://www.janathads.com/api/state-list/')
         setAllState(stateResponse.data)
         // const allState = await stateResponse.data
     }
-    
+
     useEffect(() => {
         axiosStateResponse()
     }, [])
 
 
     return (
-        <div className="container">
-            <div className="col-md-8 justify-content-center">
-                <label className="form-label" ><h4>Add State Here...</h4></label>
-                    <div className="">
-                        <div className="flex-wrapper">
-                            <div style={{flex: 4}}>
-                                <input onChange={(e)=>setAddState({'id':addState.id, 'state':e.target.value})} value={addState.state} className="form-control" id="title" type="text" placeholder="Add status here.." />
-                            </div>
-                            <div style={{flex: 1}}>
-                                <button className="btn btn-primary" onClick={handleState} type="submit">Add</button>                                        
-                            </div>
+        <div className="container py-5">
+            <h4 className="linetitle mb-4">Add State</h4>
+            <div className="row">
+                <div className="col-md-8">
+                    <div className="input-group mb-3">
+                        <input onChange={(e) => setAddState({ 'id': addState.id, 'state': e.target.value })} value={addState.state} className="form-control" id="title" type="text" placeholder="Add State here.." />
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" onClick={handleState} type="submit" id="button-addon2">Add</button>
                         </div>
                     </div>
-                    <div className="">
-                        {allState? (
-                        allState.map(function(eachState, index){
-                            return(
-                                <div key={index} className="task-wrapper flex-wrapper">
 
-                                    <div style={{flex:7}}>
-                                        <span>{eachState.state}</span>
-                                    </div>
+                    <ul className="list-group list-group-flush">
+                        {allState ? (
+                            allState.map(function (eachState, index) {
+                                return (
+                                    <li className="list-group-item d-flex px-0" key={index}>
+                                        {eachState.state}
+                                        <button onClick={() => editState(eachState)} className="btn btn-sm btn-warning ml-auto mr-2"><i className="fa fa-pencil mr-1"></i>Edit</button>
+                                        <button onClick={() => deleteState(eachState)} className="btn btn-sm btn-danger delete"><i className="fa fa-trash mr-1"></i>Delete</button></li>
 
-                                    <div style={{flex:1}}>
-                                        <button onClick={() => editState(eachState)} className="btn btn-sm btn-outline-info">Edit</button>
-                                    </div>
+                                )
+                            })
+                        ) : null}
+                    </ul>
 
-                                    <div style={{flex:1}}>
-                                        <button onClick={() => deleteState(eachState)} className="btn btn-sm btn-outline-dark delete">-</button>
-                                    </div>
-
-                                </div>
-                            )
-                        })
-                        ): null}
-                    </div>                            
-
+                </div>
             </div>
-
         </div>
     )
-      
-  }
+
+}
 
 export default AddState;

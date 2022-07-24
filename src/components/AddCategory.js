@@ -1,105 +1,94 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AddCategory() {
-    const [addCategory, setAddCategory] = useState({'id':'', 'category':''});
+    const [addCategory, setAddCategory] = useState({ 'id': '', 'category': '' });
     const [allCategory, setAllCategory] = useState('');
     const [isEditCategory, setIsEditCategory] = useState(false);
 
-   const handleCategory = () => {
+    const handleCategory = () => {
         requestAxios()
     }
 
-    const requestAxios = async () => {  
-        if(isEditCategory) {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-update/'+addCategory.id+'/'
+    const requestAxios = async () => {
+        if (isEditCategory) {
+            var baseURL = 'https://www.janathads.com/api/category-update/' + addCategory.id + '/'
             await axios
-            .put(baseURL, {'category':addCategory.category})
-            .then((response) => {
-            });
+                .put(baseURL, { 'category': addCategory.category })
+                .then((response) => {
+                });
             setIsEditCategory(false)
         } else {
-            baseURL = 'http://55mahesh.pythonanywhere.com/api/category-create/'
-            try{
+            baseURL = 'https://www.janathads.com/api/category-create/'
+            try {
                 await axios
-                .post(baseURL, {'category':addCategory.category})
-                .then((response) => {
-                });                
+                    .post(baseURL, { 'category': addCategory.category })
+                    .then((response) => {
+                    });
             } catch (error) {
                 console.log(error)
-            }    
+            }
         }
-        setAddCategory({'id':'', 'category':''});
+        setAddCategory({ 'id': '', 'category': '' });
         axiosCategoryResponse()
     }
 
     const editCategory = (category) => {
-        setIsEditCategory(true)    
+        setIsEditCategory(true)
         setAddCategory(category)
     }
 
     const deleteCategory = (category) => {
-        var baseURL = 'http://55mahesh.pythonanywhere.com/api/category-delete/'+category.id+'/'
+        var baseURL = 'https://www.janathads.com/api/category-delete/' + category.id + '/'
         axios
-        .delete(baseURL)
-        .then((response) => {
-            axiosCategoryResponse()
-        });
-        
-    }    
+            .delete(baseURL)
+            .then((response) => {
+                axiosCategoryResponse()
+            });
+
+    }
 
     const axiosCategoryResponse = async () => {
-        const categoryResponse = await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
+        const categoryResponse = await axios.get('https://www.janathads.com/api/category-list/')
         setAllCategory(categoryResponse.data)
         // const allCategory = await categoryResponse.data
     }
-    
+
     useEffect(() => {
         axiosCategoryResponse()
     }, [])
 
 
     return (
-        <div className="container">
-            <div className="col-md-12 justify-content-center">
-                <label className="form-label" ><h4>Add Categories Here...</h4></label> 
-                    <div  className="col-md-6">
-                        <div className="flex-wrapper">
-                            <div style={{flex: 4}}>
-                                <input onChange={(e)=>setAddCategory({'id':addCategory.id, 'category':e.target.value})} value={addCategory.category} className="form-control" id="title" type="text" placeholder="Add category here.." />
-                            </div>
-                            <div style={{flex: 1}}>
-                                <button className="btn btn-primary" onClick={handleCategory} type="submit">Add</button>                                        
-                            </div>
+        <div className="container py-5">
+            <h4 className="linetitle mb-4">Add Categories</h4>
+            <div className="row">
+                <div className="col-md-8">
+                    <div className="input-group mb-3">
+                        <input onChange={(e) => setAddCategory({ 'id': addCategory.id, 'category': e.target.value })} value={addCategory.category} className="form-control" id="title" type="text" placeholder="Add Category here.." />
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" onClick={handleCategory} type="submit" id="button-addon2">Add</button>
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        {allCategory? (
-                        allCategory.map(function(eachCategory, index){
-                            return(
-                                <div key={index} className="task-wrapper flex-wrapper">
 
-                                    <div style={{flex:7}}>
-                                        <span>{eachCategory.category}</span>
-                                    </div>
 
-                                    <div style={{flex:1}}>
-                                        <button onClick={() => editCategory(eachCategory)} className="btn btn-sm btn-outline-info">Edit</button>
-                                    </div>
+                    <ul className="list-group list-group-flush">
+                        {allCategory ? (
+                            allCategory.map(function (eachCategory, index) {
+                                return (
+                                    <li className="list-group-item d-flex px-0" key={index}>
+                                        {eachCategory.category}
+                                        <button onClick={() => editCategory(eachCategory)} className="btn btn-sm btn-warning ml-auto mr-2"><i className="fa fa-pencil mr-1"></i>Edit</button>
+                                        <button onClick={() => deleteCategory(eachCategory)} className="btn btn-sm btn-danger delete"><i className="fa fa-trash mr-1"></i>Delete</button></li>
 
-                                    <div style={{flex:1}}>
-                                        <button onClick={() => deleteCategory(eachCategory)} className="btn btn-sm btn-outline-dark delete">-</button>
-                                    </div>
 
-                                </div>
-                            )
-                        })
-                        ): null}
-                    </div>                            
-            </div>            
-        </div>    
+                                )
+                            })
+                        ) : null}</ul>
+                </div>
+            </div>  </div>
     )
-      
-  }
+
+}
 
 export default AddCategory;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 
@@ -6,31 +6,30 @@ function AdsBulkUpdate() {
     const [adsHideDays, setAdsHideDays] = useState('');
 
     const axiosBulkHideResponse = async () => {
-            var baseURL = 'http://55mahesh.pythonanywhere.com/api/classified-bulk-update/?days='+adsHideDays
-            await axios
+        var baseURL = 'https://www.janathads.com/api/classified-bulk-update/?days=' + adsHideDays
+        await axios
             .get(baseURL)
             .then((response) => {
                 alert('Data successfully updated')
-        });
+            });
     }
 
     return (
-        <div className="container">
-            <div className="col-md-8">
-                <label className="form-label" ><h4>Hide your ads here...</h4></label>
-                    <div className="flex-wrapper">
-                        <div style={{flex: 4}}>
-                            <label className="form-label" >No of days to hide ads </label>
-                            <input onChange={(e)=>setAdsHideDays(e.target.value)} value={adsHideDays} className="form-control" id="title" type="text" placeholder="Add status here.." />
-                        </div>
-                        <div style={{flex: 1}}>
-                            <button className="btn btn-primary" onClick={axiosBulkHideResponse} type="submit">Add</button>                                        
+        <div className="container py-5">
+            <h4 className="linetitle mb-4">Hide your ads</h4>
+            <div className="row">
+                <div className="col-md-8">
+                    <div className="input-group">
+                        <input onChange={(e) => setAdsHideDays(e.target.value)} value={adsHideDays} className="form-control" id="title" type="text" placeholder="No of days to hide ads" />
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" onClick={axiosBulkHideResponse} type="submit" id="button-addon2">Add</button>
                         </div>
                     </div>
-            </div>
-        </div>
+
+                </div>
+            </div></div>
     )
-      
+
 }
 
 export default AdsBulkUpdate;

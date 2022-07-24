@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import {VerticleButton as ScrollUpButton} from "react-scroll-up-button"; //Add this line Here
 
 function AdsCategory() {
 	const { categoryId } = useParams();
@@ -13,53 +14,53 @@ function AdsCategory() {
 	const [clearAllSearchText, setClearAllSearchText] = useState(false);
 	const history = useNavigate();
 
-    const axiosClassifiedResponse = async (disctrictId) => {
+	const axiosClassifiedResponse = async (disctrictId) => {
 		setDisctrictId(disctrictId)
-		let classifiedUrl = 'http://55mahesh.pythonanywhere.com/api/classified-list-bydistrict/'+disctrictId+'/'
-		if(disctrictId === '0'){
-			classifiedUrl = 'http://55mahesh.pythonanywhere.com/api/category-view/'+categoryId
+		let classifiedUrl = 'https://www.janathads.com/api/classified-list-bydistrict/' + disctrictId + '/'
+		if (disctrictId === '0') {
+			classifiedUrl = 'https://www.janathads.com/api/category-view/' + categoryId
 		}
 		await axios.get(classifiedUrl)
 			.then((adsResponse) => {
-				if(searchText.length == 1){
+				if (searchText.length == 1) {
 					setSerachText('')
 				}
-				const filteredData = adsResponse.data.filter(item =>{
+				const filteredData = adsResponse.data.filter(item => {
 					return Object.keys(item).some(key => {
-						if(item[key] && item['category_id']['id']==categoryId){
+						if (item[key] && item['category_id']['id'] == categoryId) {
 							return item[key].toString().toLowerCase().includes(searchText)
 						}
 					})
-				})				
+				})
 				setAllClassifieds(filteredData)
 				setClearAllSearchText(false)
 			}
-		)
+			)
 	}
-    const axiosDistrictResponse = async () => {
-		await axios.get('http://55mahesh.pythonanywhere.com/api/district-list/')
+	const axiosDistrictResponse = async () => {
+		await axios.get('https://www.janathads.com/api/district-list/')
 			.then((districtResponse) => {
 				setAllDistrict(districtResponse.data)
 			}
-		)
-    }	
+			)
+	}
 
 	const handleChange = (searchFieldText) => {
 		setSerachText(searchFieldText)
 		searchFieldText = searchFieldText.toLowerCase().trim()
-		if(!searchFieldText){
+		if (!searchFieldText) {
 			setAllClassifieds(getDistValue(disctrictId))
-		} else{
-			const filteredData = allClassifieds.filter(item =>{
+		} else {
+			const filteredData = allClassifieds.filter(item => {
 				return Object.keys(item).some(key => {
-					if(item[key]){
+					if (item[key]) {
 						return item[key].toString().toLowerCase().includes(searchFieldText)
-					}		
+					}
 				})
 			})
 			setAllClassifieds(filteredData)
 		}
-	}	
+	}
 
 	const clearSearchText = (e) => {
 		e.preventDefault();
@@ -68,23 +69,23 @@ function AdsCategory() {
 		axiosClassifiedResponse(disctrictId)
 	}
 
-    const axiosCategoryResponse = async () => {
-		await axios.get('http://55mahesh.pythonanywhere.com/api/category-list/')
-		.then((categoryResponse) => {
-			setAllCategory(categoryResponse.data)
-		})
+	const axiosCategoryResponse = async () => {
+		await axios.get('https://www.janathads.com/api/category-list/')
+			.then((categoryResponse) => {
+				setAllCategory(categoryResponse.data)
+			})
 		// const allCategory = await categoryResponse.data
-		if(allCategory){
-			const selectedCategory = allCategory.map(item =>{
-				if(item.id == categoryId){
-					return item.category	
-				}	
-			}).filter(function(elm){
+		if (allCategory) {
+			const selectedCategory = allCategory.map(item => {
+				if (item.id == categoryId) {
+					return item.category
+				}
+			}).filter(function (elm) {
 				return elm !== undefined;
 			})
 			setAdsCategory(selectedCategory[0])
 		}
-    }	
+	}
 
 	useEffect(() => {
 		axiosDistrictResponse()
@@ -97,107 +98,126 @@ function AdsCategory() {
 		axiosClassifiedResponse(disctrictId)
 	}
 
+	function openWhatsApp(classifiedId) {
+		window.open('whatsapp://send?text= https://www.janathads.com/classified-view/' + classifiedId);
+	}	
+
 	const backToHomePage = (e) => {
 		history('/')
 	}
-	
-    return (
-        <div>
-			<section className="hero-area bg-1 text-center overly">
+
+	return (
+		<div>
+			<section className="hero-area bg-1 text-center text-white overlay">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
 							<div className="content-block">
-								<h1>Advertisements for {adsCategory}</h1>
+								<h1 className="display-4 mb-3">Advertisements Near You</h1>
 								<div className="short-popular-category-list text-center">
-									<h2>Ads Available In Locations</h2>
-									<ul className="list-inline">
+									<h3 className="body-font text-uppercase font-size-sm mb-3">Ads Available In Locations</h3>
+									<ul className="list-inline text-uppercase mt-3 locations">
 										<li className="list-inline-item">
-											<Link to="" onClick={()=>getDistValue("0")} > All</Link>
+											<Link to="" onClick={() => getDistValue("0")} className="text-white px-3 py-1 text-decoration-none" > All</Link>
 										</li>
-										{allDistrict?
+										{allDistrict ?
 											allDistrict.map((district, index) => {
-												return(
+												return (
 													<li className="list-inline-item" key={index}>
-														<Link to="" onClick={()=>getDistValue(district.id)} > {district.district}</Link>
-													</li>										
+														<Link to="" onClick={() => getDistValue(district.id)} className="text-white px-3 py-1 border-left text-decoration-none" > {district.district}</Link>
+													</li>
 												)
 											}
-										)
-										:
-										""
+											)
+											:
+											""
 										}
 									</ul>
-									<button type="submit" onClick={backToHomePage} className="btn btn-main">Back To Home</button>
 								</div>
 							</div>
 							<div className="advance-search">
 								<form action="#">
-									<div className="row">
-										<div className="col-lg-12 col-md-8">
-											<div className="block d-flex">
-												<input type="text" onChange={(e)=> handleChange(e.target.value)} value={searchText} className="form-control mb-2 mr-sm-2 mb-sm-0" id="ad_search" placeholder="Search for ads"/>
-												<button type="submit" onClick={clearSearchText} className="btn btn-main">Clear</button>
+									<div className="row justify-content-center">
+										<div className="col-md-8">
+											<div className="rounded-pill bg-white d-flex align-items-center p-2">
+												<input type="text" onChange={(e) => handleChange(e.target.value)} value={searchText} className="form-control bg-transparent border-0" id="ad_search" placeholder="Search for ads" />
+												<button type="submit" onClick={clearSearchText} className="btn btn-danger btn-main  rounded-pill py-2 px-4  ">Clear</button>
 											</div>
 										</div>
 									</div>
 								</form>
-								
+
 							</div>
-							
+
+
+							<button type="submit" onClick={backToHomePage} className="btn rounded-pill text-white mt-3 btn-brand">Back to Home</button>
+
 						</div>
 					</div>
 				</div>
 			</section>
 			<section className="popular-deals section bg-gray">
-				<div className="container">
-					<div className="row">
-						{allClassifieds?
-							allClassifieds.map((eachAd, index) =>  {
-								if(eachAd.is_hide){
-									return(
-										<div className="col-sm-12 col-lg-4" key={index}>
-											<div className="product-item bg-light">
-												<div className="card">
-													<div className="thumb-content">
-														{eachAd.images?
-														<Link to={"/classified-view/"+eachAd.id}>
-															<img className="card-img-top img-fluid" src={ "http://127.0.0.1:8000"+eachAd.images} alt="image description"/>
-														</Link>
-														: ''
+				<div className="container py-5">
+				<ScrollUpButton />
+					<div className="row all-products">
+						{allClassifieds ?
+							allClassifieds.map((eachAd, index) => {
+								if (eachAd.is_hide) {
+									return (
+										<div className="col-sm-12 col-lg-4 " key={index}>
+											<div className="product-item ">
+												<div className="card border-0 mb-4 border border-secondary rounded-lg">
+													
+														{eachAd.images ?
+															// <Link target={"_blank"} to={"/classified-view/" + eachAd.id}>
+															// 	<img className="card-img-top img-fluid" src={"https://www.janathads.com/media/" + eachAd.images} alt="adsimage" />
+															// </Link>
+															<img className="card-img-top img-fluid border border-secondary" src={"https://www.janathads.com/media/" + eachAd.images} alt="adsimage" />
+															: ''
 														}
+													
+													<div className="card-body border border-secondary rounded-lg">
+														{/* <div className="card-pop">
+															<p className="mb-0 small"><i className="fa fa-tag mr-2 text-info"></i>{eachAd.category_id.category}</p>
+														</div> */}
+														{eachAd.title !== '-' ?
+															// <h4 className="card-title"><Link className="text-dark text-decoration-none" target={"_blank"} to={"/classified-view/" + eachAd.id}>{eachAd.title}</Link></h4>
+															<h4 className="card-title text-dark text-decoration-none">{eachAd.title}</h4>
+															: ''}
+														{eachAd.description !== '-' ?	
+															// <p className="card-text">{eachAd.description}</p>
+															<p className="card-text" dangerouslySetInnerHTML={{ __html: eachAd.description.replace('/\n/g', '<br />')}}></p>
+															: ''}
+														<p className="small text-muted mb-0 row">
+															<i className="fa fa-map-marker mr-0 col-1"></i>{eachAd.district_id.district}  
+															<i className="fa fa-calendar mr-0 col-1"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10)}
+														</p>
+														{/* <p className="small text-muted mb-0"><i className="fa fa-calendar mr-2 px-md-5"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10)}</p> */}
 													</div>
-													<div className="card-body">
-														<h4 className="card-title"><Link to={"/classified-view/"+eachAd.id}>{eachAd.title}</Link></h4>
-														<ul className="list-inline product-meta">
-															<li className="list-inline-item">
-																<i className="fa fa-folder-open-o"></i>{eachAd.district_id.district}
-															</li>										
-															<li className="list-inline-item">
-																<i className="fa fa-folder-open-o"></i>{eachAd.category_id.category}
-															</li>
-															<li className="list-inline-item">
-																<i className="fa fa-calendar"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10)}
-															</li>
-														</ul>
-														<p className="card-text">{eachAd.description}</p>
-														<p className="card-text">Phone: {eachAd.phone_number}</p>
+													<div className="card-footer d-flex justify-content-between rounded-lg bg-white border border-secondary">
+
+														<p className="card-text mb-0 fa fa-phone mr-0 ">{typeof eachAd.phone_number !== 'undefined' && eachAd.phone_number !=='' && eachAd.phone_number !== 'null' ? <a href={'tel:+91' + eachAd.phone_number } className="text-dark text-decoration-none"><i></i> {eachAd.phone_number}</a> : ''}</p>
+														<i className="fa fa-whatsapp text-success fa_custom fa-2x" onClick={() => openWhatsApp(eachAd.id)} />
 													</div>
 												</div>
 											</div>
-										</div>							
+										</div>
 									)
+									// return(<button type="submit" onClick={backToHomePage} className="btn rounded-pill text-white mt-3 btn-brand">Back to Home</button>)
 								}
-							}):
-							<div><h4>None</h4></div>
-						}	
+							})  :
+							'none'
+						}
+					</div>
+					<div className='d-flex justify-content-center'>
+						{allClassifieds ? <button type="submit" onClick={backToHomePage} className="btn rounded-pill text-white mt-3 btn-brand">Back to Home</button> : ('No ads found for this category') }
 					</div>
 				</div>
 			</section>
 
-        </div>
-    )
-      
-  }
+		</div>
+	)
+
+}
 
 export default AdsCategory;
