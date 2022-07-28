@@ -127,6 +127,7 @@ function DashBoard() {
 												<th>Ad description</th>
 												<th className="text-center">Ad Category</th>
 												<th className="text-center">Ad Hidden</th>
+												<th className="text-center">Ads Expire</th>
 												<th className="text-center">How Old Ad is</th>
 												<th className="text-center">Action</th>
 											</tr>
@@ -147,12 +148,13 @@ function DashBoard() {
 															</td>
 															<td className="product-category"><span className="categories">{eachAd.category_id.category}</span></td>
 															<td className="product-category"><span className="categories">{eachAd.is_hide ? "No" : "Yes"}</span></td>
+															<td className="product-category"><span className="categories">{eachAd.ads_expire_day}</span></td>
 															<td className="product-category"><span className="categories">{findDayDifference(eachAd.updated_at)}</span></td>
 															<td className="action" data-title="Action">
 																<div className="">
 																	<ul className="list-inline justify-content-center text-nowrap">
 																		<li className="list-inline-item">
-																			<Link to={"/classified-view/" + eachAd.id} data-toggle="tooltip" data-placement="top" title="View Ad" className="view btn btn-sm btn-info" >
+																			<Link to={"/classified-view/" + eachAd.id} target={"_blank"} data-toggle="tooltip" data-placement="top" title="View Ad" className="view btn btn-sm btn-info" >
 																				<i className="fa fa-eye"></i>
 																			</Link>
 																		</li>

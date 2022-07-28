@@ -35,6 +35,7 @@ function AddClassifieds() {
         classified_users_id: user_detail.userId,
         classified_is_hide: "",
         classified_phonenum: "",
+        classified_expire_days:""
     };
 
     const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png']
@@ -66,7 +67,9 @@ function AddClassifieds() {
         classified_zipcode: Yup.string()
             .matches(/^\d{6,6}$/, "Must be digits and characters required are 6."),
             // .test('len', 'Must be exactly 10 characters', user_number => user_number && user_number.toString().length === 10),
-        classified_is_hide: Yup.number().required("Update hide unhide required"),
+        classified_expire_days: Yup.string()
+            .matches(/^\d+$/, "Must be digits and characters required are 1."),            
+        classified_is_hide: Yup.number().required("You must select Hide or Show"),
     });    
 
     const handleSubmitClick = (adsValues) => {
@@ -86,6 +89,7 @@ function AddClassifieds() {
         formData.append('district_id', adsValues.classified_district_id);        
         formData.append('state_id', adsValues.classified_state_id);
         formData.append('phone_number', adsValues.classified_phonenum);
+        formData.append('ads_expire_day', adsValues.classified_expire_days ? adsValues.classified_expire_days : 0);
         if (adsValues.classified_image !== '') {
             formData.append('images', adsValues.classified_image, adsValues.classified_image.name); 
         }
@@ -236,6 +240,10 @@ function AddClassifieds() {
                                         <Field className="form-control" id="classified_phonenum" type="text" name="classified_phonenum" placeholder="Phone number" />
                                         <ErrorMessage name="classified_phonenum" component="span" className="error small text-danger" />
                                     </div>
+                                    <div className="form-group">
+                                        <Field className="form-control" id="classified_expire_days" type="text" name="classified_expire_days" placeholder="No of days to Ads expire" />
+                                        <ErrorMessage name="classified_expire_days" component="span" className="error small text-danger" />
+                                    </div>                                    
                                     {/* <div className="form-group">
                                         <div className="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="classified_is_hide" name="classified_is_hide" className="custom-control-input" />
@@ -248,11 +256,11 @@ function AddClassifieds() {
                                     </div>                */}
                                     <div className="form-group">
                                         <div className="custom-control custom-control-inline">
-                                            <label>is hide</label>
+                                            <label>Hide</label>
                                             <Field id="classified_is_hide" type="radio" name="classified_is_hide" value="0"/>
                                         </div>
                                         <div className="custom-control custom-control-inline">
-                                            <label>Un hide</label>
+                                            <label>Show</label>
                                             <Field id="classified_is_hide" type="radio" name="classified_is_hide" value="1"/>
                                                 <ErrorMessage name="classified_is_hide" component="span" className="error small text-danger" />
                                         </div>  

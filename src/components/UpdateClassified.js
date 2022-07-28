@@ -52,6 +52,7 @@ function UpdateClassified() {
         classified_zipcode: updateAds.zip_code,
         classified_users_id: user_detail.userId,
         classified_phoneno: updateAds.phone_number,
+        classified_expire_days:updateAds.ads_expire_day,
         classified_is_hide: '',
     };
     if (isEditCategory) {
@@ -68,6 +69,7 @@ function UpdateClassified() {
             classified_zipcode: updateAds.zip_code,
             classified_users_id: user_detail.userId,
             classified_phoneno: updateAds.phone_number,
+            classified_expire_days:updateAds.ads_expire_day,
             classified_is_hide: '',
         };
     }
@@ -76,11 +78,11 @@ function UpdateClassified() {
     const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png']
 
     const adsSchema = Yup.object().shape({
-        classified_title: Yup.string().required("User name is required")
-            .min(1, "Minimum characters required are 1"),
-            // .max(20, "Maximum characters required are 20"),
-        classified_desc: Yup.string().required("First name is required")
-            .min(1, "Minimum characters required are 1"),
+        // classified_title: Yup.string().required("User name is required")
+        //     .min(1, "Minimum characters required are 1"),
+        //     // .max(20, "Maximum characters required are 20"),
+        // classified_desc: Yup.string().required("First name is required")
+        //     .min(1, "Minimum characters required are 1"),
             // .max(100, "Maximum characters required are 20"),
         classified_image: Yup.mixed()
             .when({
@@ -100,7 +102,9 @@ function UpdateClassified() {
             .nullable(),
         classified_zipcode: Yup.string().nullable()
             .matches(/^\d{6,6}$/, "Must be only digits and exactly 6 characters"),
-        classified_is_hide: Yup.number().required("Is Admin required"),
+        classified_expire_days: Yup.string()
+            .matches(/^\d+$/, "Must be digits and characters required are 1."),            
+        classified_is_hide: Yup.number().required("You must select Hide or Show"),
     });
 
     const axiosAddClassifiedResponse = async (updateAdsValues) => {
@@ -118,6 +122,7 @@ function UpdateClassified() {
         formData.append('status_id', updateAdsValues.classified_status_id);
         formData.append('users_id', updateAdsValues.classified_users_id);
         formData.append('phone_number', updateAdsValues.classified_phoneno);
+        formData.append('ads_expire_day', updateAdsValues.classified_expire_days);
         const headers = {
             "content-type": "multipart/form-data",
         }
@@ -281,19 +286,23 @@ function UpdateClassified() {
                                     <ErrorMessage name="classified_phoneno" component="span" className="error small text-danger" />
                                     </div>
                                 <div className="form-group">
-                                    <label className="form-control-label" >{updateAds.is_hide === 0 ? 'This ad is hidden from users' : 'This ad is viewable from users'}</label>
-                                        <p>Please do update while updating the Ad.</p>
+                                    <Field className="form-control" id="classified_expire_days" type="text" name="classified_expire_days" placeholder="No of days to Ads expire" />
+                                    <ErrorMessage name="classified_expire_days" component="span" className="error small text-danger" />
+                                </div>                                    
+                                <div className="form-group">
+                                    <label className="form-control-label" >{updateAds.is_hide === 0 ? 'This ad is hidden from users' : 'This ad is visible to the users'}</label>
+                                        <p>** Please select while updating the Ad.</p>
                                     </div>                                    
 
 
                                 <div className="form-group">
                                     <div className="custom-control custom-radio custom-control-inline">
                                         <Field id="classified_is_hide" type="radio" name="classified_is_hide" value="0" className="custom-control-input" />
-                                        <label className="custom-control-label" for="classified_is_hide">Is hide</label>
+                                        <label className="custom-control-label" for="classified_is_hide">Hide</label>
                                     </div>
                                     <div className="custom-control custom-radio custom-control-inline">
                                         <Field id="classified_un_hide" type="radio" name="classified_is_hide" value="1" className="custom-control-input" />
-                                        <label className="custom-control-label" for="classified_un_hide">Un hide</label>
+                                        <label className="custom-control-label" for="classified_un_hide">Show</label>
                                         <ErrorMessage name="classified_is_hide" component="span" className="error small text-danger" />
                                     </div>
                                     </div>    

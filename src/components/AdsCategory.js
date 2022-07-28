@@ -113,7 +113,7 @@ function AdsCategory() {
 					<div className="row">
 						<div className="col-md-12">
 							<div className="content-block">
-								<h1 className="display-4 mb-3">Advertisements Near You</h1>
+								<h1 className="">Advertisements Near You</h1>
 								<div className="short-popular-category-list text-center">
 									<h3 className="body-font text-uppercase font-size-sm mb-3">Ads Available In Locations</h3>
 									<ul className="list-inline text-uppercase mt-3 locations">
@@ -157,26 +157,26 @@ function AdsCategory() {
 				</div>
 			</section>
 			<section className="popular-deals section bg-gray">
-				<div className="container py-5">
+				<div className="container py-3">
 				<ScrollUpButton />
 					<div className="row all-products">
 						{allClassifieds ?
 							allClassifieds.map((eachAd, index) => {
 								if (eachAd.is_hide) {
 									return (
-										<div className="col-sm-12 col-lg-4 " key={index}>
-											<div className="product-item ">
-												<div className="card border-0 mb-4 border border-secondary rounded-lg">
+										<div className="col-sm-12 col-lg-4 mb-4 " key={index}>
+											<div className="product-item rounded-4">
+												<div className="card border-0 mb-0 rounded-lg shadow-pop border-primary">
 													
 														{eachAd.images ?
 															// <Link target={"_blank"} to={"/classified-view/" + eachAd.id}>
 															// 	<img className="card-img-top img-fluid" src={"https://www.janathads.com/media/" + eachAd.images} alt="adsimage" />
 															// </Link>
-															<img className="card-img-top img-fluid border border-secondary" src={"https://www.janathads.com/media/" + eachAd.images} alt="adsimage" />
+															<img className="card-img-top img-fluid shadow-pop" src={"https://www.janathads.com/media/" + eachAd.images} alt="adsimage" />
 															: ''
 														}
 													
-													<div className="card-body border border-secondary rounded-lg">
+													<div className="card-body rounded-lg shadow-pop pb-2">
 														{/* <div className="card-pop">
 															<p className="mb-0 small"><i className="fa fa-tag mr-2 text-info"></i>{eachAd.category_id.category}</p>
 														</div> */}
@@ -186,17 +186,18 @@ function AdsCategory() {
 															: ''}
 														{eachAd.description !== '-' ?	
 															// <p className="card-text">{eachAd.description}</p>
-															<p className="card-text" dangerouslySetInnerHTML={{ __html: eachAd.description.replace('/\n/g', '<br />')}}></p>
+															<p className="card-text" dangerouslySetInnerHTML={{ __html: eachAd.description !== '[object Object]' ? eachAd.description.replace('/\n/g', '<br />') : ''}}></p>
 															: ''}
-														<p className="small text-muted mb-0 row">
-															<i className="fa fa-map-marker mr-0 col-1"></i>{eachAd.district_id.district}  
-															<i className="fa fa-calendar mr-0 col-1"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10)}
+														<p className="small text-muted mb-0 row d-inline">
+															<i className="fa fa-map-marker mr-0 mb-0 col-1"></i>{eachAd.district_id.district}  
+															<i className="fa fa-key fa-fw mr-0 mb-0 col-1"></i>{eachAd.category_id.category}
+															<i className="fa fa-calendar mr-0 mb-0 col-1"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10)}
 														</p>
 														{/* <p className="small text-muted mb-0"><i className="fa fa-calendar mr-2 px-md-5"></i>{new Date(eachAd.updated_at).toISOString().slice(0, 10)}</p> */}
 													</div>
-													<div className="card-footer d-flex justify-content-between rounded-lg bg-white border border-secondary">
+													<div className="card-footer d-flex justify-content-between bg-white rounded-lg shadow-pop pb-1 d-inline">
 
-														<p className="card-text mb-0 fa fa-phone mr-0 ">{typeof eachAd.phone_number !== 'undefined' && eachAd.phone_number !=='' && eachAd.phone_number !== 'null' ? <a href={'tel:+91' + eachAd.phone_number } className="text-dark text-decoration-none"><i></i> {eachAd.phone_number}</a> : ''}</p>
+														<p className="card-text mb-0 fa fa-phone mr-0 align-item-center pt-2 ">{typeof eachAd.phone_number !== 'undefined' && eachAd.phone_number !=='' && eachAd.phone_number !== 'null' ? <a href={'tel:+91' + eachAd.phone_number } className="text-dark text-decoration-none"><i></i> {eachAd.phone_number}</a> : ''}</p>
 														<i className="fa fa-whatsapp text-success fa_custom fa-2x" onClick={() => openWhatsApp(eachAd.id)} />
 													</div>
 												</div>

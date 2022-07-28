@@ -34,7 +34,9 @@ function ViewClassified() {
     useEffect(() => {
         axiosClassifiedResponse()
     }, [])
-
+console.log(' 1 => ', typeof updateAds.description)
+console.log(' 1 => ', updateAds.description === 'Object')
+console.log(' 1 => ', JSON.stringify(updateAds.description))
     return (
         <div>
             <section className="hero-area bg-1 text-center text-white overlay">
@@ -53,15 +55,15 @@ function ViewClassified() {
                 <div className="container bg-white mt-n5 z-index-1 position-relative rounded shadow p-4 mb-4">
                     <div className="row">
                         <div className="col-md-8">
-                            <h2>{updateAds && updateAds.title !== '-' ? updateAds.title : ''} <span className="badge badge-success">{updateAds ? updateAds.status_id.status : ''}</span></h2>
-                            <p className="text-muted pt-4" dangerouslySetInnerHTML={{ __html: updateAds ? updateAds.description.replace('/\n/g', '<br />') : ''}}></p>
+                            <h2>{updateAds && updateAds.title !== '-' ? updateAds.title : ''} <span className="badge badge-success">{updateAds ? updateAds.status_id.status : '--------- No Ad Title'}</span></h2>
+                            <p className="text-muted pt-4" dangerouslySetInnerHTML={{ __html: updateAds && updateAds.description !== '[object Object]' && updateAds.description !== '' ? updateAds.description.replace('/\n/g', '<br />') : '--------- No Ad Description'}}></p>
                             {/* <p className="text-muted pt-4" >{updateAds && updateAds.description !== '-' ? updateAds.description : ''}</p> */}
                             {/* <p><i className="fa fa-tag mr-2 text-info"></i> {updateAds ? updateAds.category_id.category : ''}</p> */}
                             
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item pl-0"><i className="fa fa-phone mr-3"></i>{typeof updateAds.phone_number !== 'undefined' && updateAds.phone_number !=='' && updateAds.phone_number !== 'null' ? updateAds.phone_number : ''}</li>
-                                <li className="list-group-item pl-0"><i className="fa fa-map-o mr-3"></i>{updateAds && updateAds.description !== '' ? updateAds.state_id.state : ''}</li>
+                                <li className="list-group-item pl-0"><i className="fa fa-map-o mr-3"></i>{updateAds ? updateAds.state_id.state : ''}</li>
                                 <li className="list-group-item pl-0"><i className="fa fa-map-marker mr-3"></i>{updateAds ? updateAds.district_id.district : ''}</li>
                                 <li className="list-group-item pl-0"><i className="fa fa-calendar mr-3"></i>{updateAds.updated_at ? new Date(updateAds.updated_at).toISOString().slice(0, 10) : ''}</li>
                             </ul>
@@ -76,9 +78,9 @@ function ViewClassified() {
                                 : ''
                             }</div>
                     </div>
-					<div className='d-flex justify-content-center'>
+					{/* <div className='d-flex justify-content-center'>
 						{updateAds ? <button type="submit" onClick={returnToPrev} className="btn rounded-pill text-white mt-3 btn-brand">Back to My Ads</button> : ('No ads found for this category') }
-					</div>                    
+					</div>                     */}
                 </div>
             </section>
 
