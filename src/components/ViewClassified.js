@@ -34,9 +34,7 @@ function ViewClassified() {
     useEffect(() => {
         axiosClassifiedResponse()
     }, [])
-console.log(' 1 => ', typeof updateAds.description)
-console.log(' 1 => ', updateAds.description === 'Object')
-console.log(' 1 => ', JSON.stringify(updateAds.description))
+
     return (
         <div>
             <section className="hero-area bg-1 text-center text-white overlay">
